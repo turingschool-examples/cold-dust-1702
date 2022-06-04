@@ -1,6 +1,6 @@
-require 'rails_helper'
+require 'rails_helper' 
 
-RSpec.describe Chef, type: :model do
+RSpec.describe 'chefs ingredients index page' do 
   let!(:chef_1) {Chef.create!(name: "Boyardee")}
   let!(:dish_1) {chef_1.dishes.create!(name: "Raveoli" , description: "delicious" )}
   let!(:dish_2) {chef_1.dishes.create!(name: "Spagetti" , description: "yum" )}
@@ -8,16 +8,10 @@ RSpec.describe Chef, type: :model do
   let!(:ingredient_1) {dish_1.ingredients.create!(name: "cheese", calories: 234)}
   let!(:ingredient_2) {dish_1.ingredients.create!(name: "flour", calories: 100)}
 
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-    it { should have_many(:dish_ingredients).through(:dishes) }
-    it { should have_many(:ingredients).through(:dish_ingredients) } 
-  end
+  it 'has unique list of all chefs ingredients' do 
+    visit chef_ingredients_path(chef_1.id)
 
-  it 'shows unique list of ingredients' do 
-    expect(chef_1.unique_ingredients).to eq(["cheese", "flour"])
+    expect(page).to have_content("flour")
+    expect(page).to have_content("cheese", count: 1)
   end
 end
