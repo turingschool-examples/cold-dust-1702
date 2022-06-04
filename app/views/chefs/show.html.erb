@@ -1,5 +1,11 @@
 <h1>Chef Show Page</h1>
 
 <h3>Name: <%= @chef.name %></h3>
+<div id="most-popular-ingredients">
+<h3>Top Three Ingredients</h3>
+<% @chef.top_ingredients.each do |ingredient| %>
+<p><%= ingredient.name %></p>
+<% end %><hr>
+</div>
 
 <%= link_to "List of All Ingredients", "/chefs/#{@chef.id}/ingredients" %>
