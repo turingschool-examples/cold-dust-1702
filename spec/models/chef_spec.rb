@@ -6,5 +6,32 @@ RSpec.describe Chef, type: :model do
   end
   describe "relationships" do
     it {should have_many :dishes}
+    it {should have_many(:dish_ingredients).through(:dishes)}
+    it {should have_many(:ingredients).through(:dish_ingredients)}
+  end
+
+  describe "instance methods" do
+    before :each do
+      @chef = Chef.create!(name: 'Charles')
+      @chef2 = Chef.create!(name: 'Barkley')
+      @dish_1 = @chef.dishes.create!(name: "Fish", description: "Fresh Caught Salmon")
+      @dish_2 = @chef.dishes.create!(name: "Steak", description: "Fresh Caught Cow")
+      @dish_3 = @chef2.dishes.create!(name: "Fruit", description: "Fresh Berries")
+      @ingredient_1 = Ingredient.create!(name: "Wild Salmon", calories: 100)
+      @ingredient_2 = Ingredient.create!(name: "Carrots", calories: 50)
+      @ingredient_3 = Ingredient.create!(name: "Steak", calories: 200)
+      @ingredient_4 = Ingredient.create!(name: "Blueberries", calories: 20)
+      DishIngredient.create!(dish: @dish_1, ingredient: @ingredient_1)
+      DishIngredient.create!(dish: @dish_1, ingredient: @ingredient_2)
+      DishIngredient.create!(dish: @dish_2, ingredient: @ingredient_2)
+      DishIngredient.create!(dish: @dish_2, ingredient: @ingredient_3)
+      DishIngredient.create!(dish: @dish_3, ingredient: @ingredient_4)
+    end
+
+    describe "#ingredient_list" do
+      it 'returns unique list of ingrediets from a chef' do
+        expect(@chef.ingredient_list).to eq([@ingredient_1, @ingredient_2, @ingredient_3])
+      end
+    end
   end
 end
