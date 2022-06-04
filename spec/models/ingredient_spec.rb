@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should have_many :dish_ingredients}
+  it {should have_many(:dishes).through(:dish_ingredients)}
+  it {should have_many(:chefs).through(:dishes)}
 end
