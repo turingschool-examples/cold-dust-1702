@@ -27,4 +27,21 @@ RSpec.describe Dish, type: :feature do
       expect(page).to have_content(ingredient3.name)
     end
   end
+
+  it 'should display the name/dscription/chefs name, and a list of ingredients' do
+    chef1 = Chef.create!(name: 'Bryce Wein')
+    dish1 = Dish.create!(name: 'Pasta', description: 'Spicy meatballs with garlic sauce', chef_id: chef1.id)
+    ingredient1 = Ingredient.create!(name: 'Sausage', calories: 100)
+    ingredient2 = Ingredient.create!(name: 'Penne Pasta', calories: 200)
+    ingredient3 = Ingredient.create!(name: 'Red Garlic Sauce', calories: 25)
+    dish_ingredient1 = DishIngredient.create(dish_id: dish1.id, ingredient_id: ingredient1.id)
+    dish_ingredient2 = DishIngredient.create(dish_id: dish1.id, ingredient_id: ingredient2.id)
+    dish_ingredient3 = DishIngredient.create(dish_id: dish1.id, ingredient_id: ingredient3.id)
+
+    visit dish_path(dish1)
+
+    within '#calories' do
+      expect(page).to have_content(325)
+    end
+  end
 end
