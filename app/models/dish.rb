@@ -4,4 +4,8 @@ class Dish < ApplicationRecord
 
   has_many :dish_ingredients, dependent: :destroy
   has_many :ingredients, through: :dish_ingredients, dependent: :destroy
+
+  def calorie_count
+    ingredients.sum(:calories)
+  end
 end
