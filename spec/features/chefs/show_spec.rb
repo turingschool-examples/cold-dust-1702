@@ -15,7 +15,7 @@ RSpec.describe Chef, type: :feature do
       chef_2 = Chef.create!(name: "James Dean")
       dish_1 = chef_1.dishes.create!(name: "The Knockout", description: "lots of food on this one")
       dish_2 = chef_1.dishes.create!(name: "The Uppercut", description: "even more of food on this one")
-      dish_3 = chef_1.dishes.create!(name: "The TKO", description: "even more of food on this one")
+      dish_3 = chef_1.dishes.create!(name: "The TKO", description: "don't try this at home")
 
       ingredient_1 = Ingredient.create!(name:"Tomato", calories: 85)
       ingredient_2 = Ingredient.create!(name:"Rice", calories: 185)
@@ -47,6 +47,63 @@ RSpec.describe Chef, type: :feature do
       expect(page).to have_content(ingredient_4.name, count:1)
       expect(page).to_not have_content(ingredient_5.name, count:1)
       expect(page).to_not have_content(ingredient_6.name, count:1)
+
+    end
+
+    it 'tests extension 1' do
+      # Extension
+      # As a visitor
+      # When I visit a chef's show page
+      # I see the three most popular ingredients that the chef uses in their dishes
+      # (Popularity is based off of how many dishes use that ingredient)
+
+      chef_1 = Chef.create!(name: "Mike Tyson")
+      dish_1 = chef_1.dishes.create!(name: "The Knockout", description: "lots of food on this one")
+      dish_2 = chef_1.dishes.create!(name: "The Uppercut", description: "even more of food on this one")
+      dish_3 = chef_1.dishes.create!(name: "The TKO", description: "don't try this at home")
+
+      ingredient_1 = Ingredient.create!(name:"Tomato", calories: 85)
+      ingredient_2 = Ingredient.create!(name:"Rice", calories: 185)
+      ingredient_3 = Ingredient.create!(name:"Butter", calories: 285)
+      ingredient_4 = Ingredient.create!(name:"Sauce", calories: 55)
+      ingredient_5 = Ingredient.create!(name:"Chocolate", calories: 105)
+      ingredient_6 = Ingredient.create!(name:"Coffee", calories: 5)
+
+      #6 ingredients, 3 dishes
+      #1 dish will take all 6
+      #other dish will take 4
+      #other dish will take 3
+      #expect top 3 to be the three that's used in all 3 dishes
+
+      IngredientDish.create!(ingredient_id: ingredient_1.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_2.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_3.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_4.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_5.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_6.id, dish_id: dish_1.id)
+
+      IngredientDish.create!(ingredient_id: ingredient_1.id, dish_id: dish_2.id)
+      IngredientDish.create!(ingredient_id: ingredient_2.id, dish_id: dish_2.id)
+      IngredientDish.create!(ingredient_id: ingredient_3.id, dish_id: dish_2.id)
+      IngredientDish.create!(ingredient_id: ingredient_4.id, dish_id: dish_2.id)
+
+      IngredientDish.create!(ingredient_id: ingredient_1.id, dish_id: dish_3.id)
+      IngredientDish.create!(ingredient_id: ingredient_2.id, dish_id: dish_3.id)
+      IngredientDish.create!(ingredient_id: ingredient_3.id, dish_id: dish_3.id)
+
+      visit "/chefs/#{chef_1.id}"
+
+      expect(page).to have_content("Top 3 Ingredients")
+
+      within "#top-3" do
+        expect(page).to have_content(ingredient_1.name)
+        expect(page).to have_content(ingredient_2.name)
+        expect(page).to have_content(ingredient_3.name)
+        expect(page).to_not have_content(ingredient_4.name)
+        expect(page).to_not have_content(ingredient_5.name)
+        expect(page).to_not have_content(ingredient_6.name)
+
+      end
 
     end
   end
