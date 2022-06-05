@@ -25,6 +25,7 @@ RSpec.describe Dish, type: :feature do
       IngredientDish.create!(ingredient_id: ingredient_4.id, dish_id: dish_2.id)
 
       visit "/dishes/#{dish_1.id}"
+      save_and_open_page
 
       expect(page).to have_content("#{dish_1.name}")
       expect(page).to have_content("#{dish_1.description}")
