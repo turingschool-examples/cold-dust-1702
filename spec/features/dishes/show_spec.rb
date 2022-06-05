@@ -10,7 +10,7 @@ RSpec.describe 'dish show' do
     DishIngredient.create!(dish_id: dish_1.id, ingredient_id: ingredient_2.id)
 
     visit "/dishes/#{dish_1.id}"
-require "pry"; binding.pry
+# require "pry"; binding.pry
       expect(page).to have_content("Dish: Chicken Rice")
       expect(page).to have_content("Description: This is a local Singaporean dish")
       expect(page).to have_content("Chef: Lee Kwan Yew")
