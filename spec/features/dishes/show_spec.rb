@@ -25,7 +25,6 @@ RSpec.describe Dish, type: :feature do
       IngredientDish.create!(ingredient_id: ingredient_4.id, dish_id: dish_2.id)
 
       visit "/dishes/#{dish_1.id}"
-      save_and_open_page
 
       expect(page).to have_content("#{dish_1.name}")
       expect(page).to have_content("#{dish_1.description}")
@@ -41,8 +40,31 @@ RSpec.describe Dish, type: :feature do
       expect(page).to have_content("#{chef_1.name}")
       expect(page).to_not have_content("#{chef_2.name}")
 
+    end
 
+    it 'tests user story 2' do
+      # Story 2 of 3
+      # As a visitor
+      # When I visit a dish's show page
+      # I see the total calorie count for that dish.
 
+      chef_1 = Chef.create!(name: "Mike Tyson")
+      chef_2 = Chef.create!(name: "James Dean")
+      dish_1 = chef_1.dishes.create!(name: "The Knockout", description: "lots of food on this one")
+      dish_2 = chef_1.dishes.create!(name: "The Uppercut", description: "even more of food on this one")
+
+      ingredient_1 = Ingredient.create!(name:"Tomato", calories: 90)
+      ingredient_2 = Ingredient.create!(name:"Rice", calories: 200)
+      ingredient_3 = Ingredient.create!(name:"Butter", calories: 285)
+      ingredient_4 = Ingredient.create!(name:"Sauce", calories: 55)
+
+      IngredientDish.create!(ingredient_id: ingredient_1.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_2.id, dish_id: dish_1.id)
+      IngredientDish.create!(ingredient_id: ingredient_3.id, dish_id: dish_2.id)
+      IngredientDish.create!(ingredient_id: ingredient_4.id, dish_id: dish_2.id)
+
+      visit "/dishes/#{dish_1.id}"
+      expect(page).to have_content("Total calories for this dish: #{dish_1.total_calories}")
     end
   end
 end
