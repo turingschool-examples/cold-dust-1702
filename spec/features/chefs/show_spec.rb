@@ -48,8 +48,6 @@ RSpec.describe Chef, type: :feature do
       expect(page).to_not have_content(ingredient_5.name, count:1)
       expect(page).to_not have_content(ingredient_6.name, count:1)
 
-      expect(page).to have_content("#{chef_1.unique_ingredients}")
-
     end
   end
 end
