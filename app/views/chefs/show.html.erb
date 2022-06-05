@@ -2,11 +2,10 @@
 
 <p><%= link_to "View a list of all ingredients", "/chefs/#{@chef.id}/ingredients" %></p>
 
+
 <div id="top-3">
+  <h3>Top 3 Ingredients</h3>
   <% @chef.top_3_ingredients.each do |ingredient| %>
-
     <h3><%= ingredient.name %></h3>
-
   <% end %>
-
 </div>
