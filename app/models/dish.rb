@@ -4,4 +4,8 @@ class Dish <ApplicationRecord
   has_many :ingredient_dishes
   has_many :ingredients, through: :ingredient_dishes
 
+  def total_calories
+    ingredients.sum(:calories)
+  end
+
 end
