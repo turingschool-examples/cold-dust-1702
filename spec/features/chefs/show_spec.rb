@@ -32,4 +32,31 @@ RSpec.describe 'Chefs show page', type: :feature do
       expect(page).to_not have_content("Bread")
      end
   end
+
+  describe 'extension' do
+    let!(:dish3) {chef1.dishes.create(name: "Stuff Potato", description: "Its a potateo.... stuffed with stuff")}
+    let!(:dish4) {chef1.dishes.create(name: "Lasenga", description: "Garfields Favorite")}
+    let!(:dish5) {chef1.dishes.create(name: "Spagehetti", description: "Romantic food with meatballs")}
+    let!(:ingredient5) {dish3.ingredients.create(name: "Cheese", calories: 300)}
+    let!(:ingredient6) {dish3.ingredients.create(name: "Potato", calories: 400)}
+    let!(:ingredient7) {dish3.ingredients.create(name: "Sour Cream", calories: 400)}
+    let!(:ingredient8) {dish4.ingredients.create(name: "Cheese", calories: 300)}
+    let!(:ingredient9) {dish4.ingredients.create(name: "Pasta", calories: 400)}
+    let!(:ingredient10) {dish5.ingredients.create(name: "Pasta", calories: 400)}
+    let!(:ingredient11) {dish5.ingredients.create(name: "Sour Cream", calories: 400)}
+    let!(:ingredient12) {dish5.ingredients.create(name: "Cheese", calories: 300)}
+    let!(:ingredient13) {dish5.ingredients.create(name: "Meatballs", calories: 650)}
+
+  it "can display the three most popular ingrdients that the chef uses" do
+      visit "/chefs/#{chef1.id}"
+
+      within '#three-popular-ingredients' do
+        expect(page).to have_content("Cheese")
+        expect(page).to have_content("Pasta")
+        expect(page).to have_content("Sour Cream")
+        expect(page).to_not have_content("Potato")
+        expect(page).to_not have_content("Meatballs")
+      end
+    end
+  end
 end

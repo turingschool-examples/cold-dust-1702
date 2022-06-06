@@ -7,8 +7,8 @@ class Chef <ApplicationRecord
   def unique_ingredients
     ingredients
     .select("ingredients.name")
+    .order("ingredients.name")
     .distinct
     .pluck("ingredients.name")
-
   end
 end

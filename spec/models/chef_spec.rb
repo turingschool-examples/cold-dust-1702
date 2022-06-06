@@ -25,7 +25,7 @@ RSpec.describe Chef, type: :model do
 
     it "can create a distinct list of that chefs ingredients" do
 
-      expect(chef1.unique_ingredients).to eq([ingredient1.name, ingredient2.name] )
+      expect(chef1.unique_ingredients).to eq([ingredient2.name, ingredient1.name])
 
     end
   end
