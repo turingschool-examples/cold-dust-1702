@@ -1,14 +1,25 @@
 <h2><%= @dish.name %></h2>
 
-Description: <%= @dish.description %><br>
+Description: <%= @dish.description %>
 
-Ingredients: <br>
+<br>
+
+Ingredients: 
+
+<br>
+
 <% @dish.ingredients.each do |ingredient| %>
   <ul>
     <li><%= ingredient.name %></li>
   </ul>
-  <% end %><br>
+<% end %>
 
-  Total Calories: <%= @dish.total_cals %><br><br>
+<br>
+
+Total Calories: <%= @dish.total_cals %>
+
+<br>
+
+<br>
 
   Dish by Chef <%= @dish.chef.name %>
