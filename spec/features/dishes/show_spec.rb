@@ -33,4 +33,11 @@ RSpec.describe 'Merchant Show Dash', type: :feature do
 
     expect(page).to have_content(@jimbob.name)
   end
+
+  it 'has total calorie count listed' do
+    visit "/dishes/#{@spaghetti.id}"
+
+    expect(page).to have_content(850)
+    expect(page).to have_content("Total calories: 850")
+  end
 end
