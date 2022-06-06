@@ -28,14 +28,15 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @chicken.id)
       DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @peppers.id)
       DishIngredient.create!(dish_id: @dish_2.id, ingredient_id: @noodles.id)
+      DishIngredient.create!(dish_id: @dish_2.id, ingredient_id: @chicken.id)
       DishIngredient.create!(dish_id: @dish_3.id, ingredient_id: @sausage.id)    
       DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @shrimp.id)    
       DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @noodles.id)   
     end
 
     it 'returns the ingredients a chef uses' do
-      expect(@chef_1.chef_ingredients).to eq(["Chicken", "Bell Pepper", "Noodles", "Sausage"])
-      expect(@chef_2.chef_ingredients).to eq(["Shrimp", "Noodles"])
+      expect(@chef_1.chef_ingredients).to eq(["Bell Pepper", "Chicken", "Noodles", "Sausage"])
+      expect(@chef_2.chef_ingredients).to eq(["Noodles", "Shrimp"])
     end
   end
 end

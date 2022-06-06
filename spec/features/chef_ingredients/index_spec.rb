@@ -20,13 +20,14 @@ RSpec.describe "chef ingredient's index page", type: :feature do
     DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @chicken.id)
     DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @peppers.id)
     DishIngredient.create!(dish_id: @dish_2.id, ingredient_id: @noodles.id)
+    DishIngredient.create!(dish_id: @dish_2.id, ingredient_id: @chicken.id)
     DishIngredient.create!(dish_id: @dish_3.id, ingredient_id: @sausage.id)    
     DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @shrimp.id)    
     DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @noodles.id)    
   end
 
   it 'displays a unique list of the names of all the ingredients that the chef uses' do
-    visit "chefs/#{@chef_1.id}/ingredients"
+    visit "/chefs/#{@chef_1.id}/ingredients"
 
     expect(page).to have_content("Chicken")
     expect(page).to have_content("Noodles")
@@ -34,11 +35,11 @@ RSpec.describe "chef ingredient's index page", type: :feature do
     expect(page).to have_content("Bell Pepper")
     expect(page).to_not have_content("Shrimp")
 
-    visit "chefs/#{@chef_2.id}/ingredients"
+    visit "/chefs/#{@chef_2.id}/ingredients"
 
     expect(page).to have_content("Shrimp")
+    expect(page).to have_content("Noodles")
     expect(page).to_not have_content("Chicken")
-    expect(page).to_not have_content("Noodles")
     expect(page).to_not have_content("Sausage")
     expect(page).to_not have_content("Bell Pepper")
   end
