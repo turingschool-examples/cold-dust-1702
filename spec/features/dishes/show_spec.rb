@@ -18,6 +18,7 @@ describe 'dishes show page' do
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     visit dish_path(dish1)
   end
+
   it "displays the dish's name, description, ingredients and name of the chef" do
     expect(page).to have_content("Pancakes")
     expect(page).to_not have_content("Omelette")
@@ -28,6 +29,13 @@ describe 'dishes show page' do
     expect(page).to have_content("milk")
     expect(page).to have_content("flour")
     expect(page).to_not have_content("potatoes")
-    save_and_open_page
+  end
+
+  it "displays the total calories in the dish" do
+
+    within '.dish-stats' do
+      expect(page).to have_content("230 Calories")
+    end
+
   end
 end

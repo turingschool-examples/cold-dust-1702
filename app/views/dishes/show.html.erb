@@ -5,3 +5,7 @@
 <ul> <% @dish.ingredients.each do |ingredient| %>
   <li> <%= ingredient.name %> - <i> Calories: <%= ingredient.calories %> </i></li>
     <% end %> </ul>
+
+<div class="dish-stats">
+<p> This dish has <%= @dish.calories %> Calories. </p>
+</div>
