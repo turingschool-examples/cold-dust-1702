@@ -15,7 +15,7 @@ RSpec.describe 'Dish show page', type: :feature do
   describe 'user story 1' do 
     it 'should show the dishes name and description' do 
       visit "/dishes/#{dish1.id}"
-      # save_and_open_page
+
       expect(page).to have_content(dish1.name)
       expect(page).to have_content(dish1.description)
       expect(page).to_not have_content(dish2.name)
@@ -27,6 +27,12 @@ RSpec.describe 'Dish show page', type: :feature do
       expect(page).to have_content(hotdog.name)
       expect(page).to have_content(helper.name)
       expect(page).to have_content(beef.name)
+    end
+
+    it 'has the chefs name' do 
+      visit "/dishes/#{dish1.id}"
+
+      expect(page).to have_content(chef.name)
     end
   end
 end
