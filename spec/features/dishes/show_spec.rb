@@ -25,4 +25,21 @@ RSpec.describe 'Dish Show Page', type: :feature do
       end
     end
   end
+
+  describe "User Story 2" do
+    it "shows a calory count of the ingredients" do
+      chef = Chef.create!(name: "Julia Adults")
+      dish1 = chef.dishes.create!(name: "Pizza", description: "It's a pizza.")
+      ingre1 = Ingredient.create!(name: "dough", calories: 200)
+      ingre2 = Ingredient.create!(name: "sauce", calories: 30)
+      ingre3 = Ingredient.create!(name: "cheese", calories: 100)
+      dish_ingre1 = DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingre1.id)
+      dish_ingre2 = DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingre2.id)
+      dish_ingre3 = DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingre3.id)
+
+      visit dish_path(dish1)
+
+      expect(page).to have_content("Total Calories: 330")
+    end
+  end
 end
