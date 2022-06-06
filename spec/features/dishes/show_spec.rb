@@ -1,11 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'rails_helper'
 
+RSpec.describe 'Dishes::Show' do
+  before :each do
     @chef1 = Chef.create!(name: 'ol Stirl')
 
     @dish1 = Dish.create!(name: 'Hot dog', description: 'Big gourmet hot dog', chef_id: @chef1.id)
@@ -25,3 +21,28 @@
     @dish_ingredient4 = DishIngredient.create(dish_id: @dish2.id, ingredient_id: @ingredient4.id)
     @dish_ingredient5 = DishIngredient.create(dish_id: @dish2.id, ingredient_id: @ingredient5.id)
     @dish_ingredient6 = DishIngredient.create(dish_id: @dish2.id, ingredient_id: @ingredient6.id)
+  end
+
+  it 'shows all information related to the designated dish' do
+    visit dish_path(@dish1)
+    within '#header' do
+      expect(page).to have_content(@dish1.name)
+      expect(page).to have_content(@dish1.description)
+    end
+
+    within '#body' do
+      expect(page).to have_content(@ingredient1.name)
+      expect(page).to have_content(@ingredient2.name)
+      expect(page).to have_content(@ingredient3.name)
+      expect(page).to have_content(@ingredient6.name)
+      expect(page).to have_content(@chef1.name)
+    end
+  end
+
+  it 'shows calorie count for the dish' do
+    visit dish_path(@dish1)
+    within '#calorie-count' do
+      expect(page).to have_content(305)
+    end
+  end
+end
