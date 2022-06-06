@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'chef show page' do
   it 'displays the chef name and a link to see all ingredients used by that chef' do
     chef = Chef.create!(name: 'Alfonso')
+    chef2 = Chef.create!(name: 'Evil Alfonso')
     dish = chef.dishes.create!(name: 'Sorry Salad', description: 'I am so sorry I made this.')
     lettuce = Ingredient.create!(name: 'lettuce', calories: 0)
     tears = Ingredient.create!(name: 'tears', calories: 12)
@@ -14,6 +15,8 @@ RSpec.describe 'chef show page' do
     visit "/chefs/#{chef.id}"
 
     expect(page).to have_content('Alfonso')
+
+    expect(page).to_not have_content('Evil Alfonso')
 
     expect(page).to have_link('Favorite Ingredients')
   end
