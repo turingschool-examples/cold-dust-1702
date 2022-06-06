@@ -3,3 +3,7 @@
   <%= dish.name %>
 <% end %>
 <%= link_to "Ingredients in #{@chef.name}'s Dishes", chef_ingredients_path(@chef.id) %>
+<div id="mostPopular">
+  <p>Most Popular Ingredients: 
+  <%= @chef.most_popular %></p>
+</div>

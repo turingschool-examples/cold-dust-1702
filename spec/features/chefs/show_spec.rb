@@ -60,4 +60,16 @@ RSpec.describe 'Chef show page', type: :feature do
       expect(page).to_not have_content(dish2.name)
     end
   end
+
+  describe 'extension' do 
+    xit 'lists the three most popular ingredients' do 
+      visit "/chefs/#{chef2.id}"
+      save_and_open_page
+      within '#mostPopular' do 
+        expect(page).to have_content('bun')
+        expect(page).to have_content('patty')
+        expect(page).to have_content('pickles')
+      end
+    end
+  end
 end
