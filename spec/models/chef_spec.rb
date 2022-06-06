@@ -39,6 +39,8 @@ RSpec.describe Chef, type: :model do
   describe 'instance methods' do 
     it 'returns one of each ingredient' do 
       expect(chef2.no_duplicates).to eq([beef, blue, bbq, bun, spicy_mustard, hot_kraut, kielbasa, pickles])
+      expect(chef2.no_duplicates).to_not eq([beef, blue, bbq, bun, pickles, bun, spicy_mustard, hot_kraut, kielbasa, pickles])
+      expect(chef2.no_duplicates).to_not include(sand)
     end
   end
 end

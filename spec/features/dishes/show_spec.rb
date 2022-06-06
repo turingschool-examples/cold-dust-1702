@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Dish show page', type: :feature do 
   let!(:chef) { Chef.create!(name:'Swedish Chef') }
+  let!(:chef2) { Chef.create!(name: 'Bob')}
 
   let!(:dish1) { chef.dishes.create!(name: 'Hot Dog Helper', description: 'similar to hamburger helper, but with hot dogs')}
   let!(:dish2) { chef.dishes.create!(name: 'Just Desserts', description: 'its a pile of sand, the chef was confused, apologies')}
@@ -34,6 +35,7 @@ RSpec.describe 'Dish show page', type: :feature do
       visit "/dishes/#{dish1.id}"
 
       expect(page).to have_content(chef.name)
+      expect(page).to_not have_content(chef2.name)
     end
   end
 

@@ -27,10 +27,11 @@ RSpec.describe 'Chefs ingredient index page', type: :feature do
   let!(:ingredient_dish8) {IngredientDish.create!(dish: kraut_down, ingredient: hot_kraut)}
   let!(:ingredient_dish9) {IngredientDish.create!(dish: kraut_down, ingredient: kielbasa)}
   let!(:ingredient_dish10) {IngredientDish.create!(dish: kraut_down, ingredient: pickles)}
+
   describe 'user story 3' do 
     it 'has a unique list of all the ingredients from one chef' do
       visit "/chefs/#{chef2.id}/ingredients"
-      save_and_open_page
+
       expect(page).to have_content(beef.name)
       expect(page).to have_content(blue.name)
       expect(page).to have_content(bbq.name)
