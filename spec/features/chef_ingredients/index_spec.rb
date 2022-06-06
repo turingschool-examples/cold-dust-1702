@@ -6,9 +6,9 @@ RSpec.describe 'Chef Ingredients Index Page' do
   let!(:dish) { chef.dishes.create!(name: 'Salad', description: 'Green and leafy!') }
   let!(:dish2) { chef.dishes.create!(name: 'Soup', description: 'Soup of the day!') }
 
-  let!(:ingredient1) { Ingredient.create!(name: 'Kale', calories: 100, dish: dish) }
-  let!(:ingredient2) { Ingredient.create!(name: 'Tomato', calories: 50, dish: dish) }
-  let!(:ingredient3) { Ingredient.create!(name: 'Mushroom', calories: 150, dish: dish) }
+  let!(:ingredient1) { Ingredient.create!(name: 'Kale', calories: 100) }
+  let!(:ingredient2) { Ingredient.create!(name: 'Tomato', calories: 50) }
+  let!(:ingredient3) { Ingredient.create!(name: 'Mushroom', calories: 150) }
 
   let!(:dish_ingredient1) { DishIngredient.create!(dish: dish, ingredient: ingredient1) }
   let!(:dish_ingredient2) { DishIngredient.create!(dish: dish, ingredient: ingredient2) }
