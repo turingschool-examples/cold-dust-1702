@@ -41,6 +41,6 @@ RSpec.describe 'chef show page' do
 
     expect(page).to have_content('Gluten-Free Croutons')
 
-    expect(page).to_not have_content('lettuce')
+    expect(page).to_not have_content('Pepperoni')
   end
 end
