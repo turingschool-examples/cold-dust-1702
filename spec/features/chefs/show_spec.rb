@@ -26,6 +26,7 @@ describe 'chefs show page' do
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     DishIngredient.create!(dish: dish3, ingredient: mushies)
     visit chef_path(@chef1)
+    save_and_open_page
   end
 
   it "displays the chef's name and a link to all the ingredients they use in their dishes" do
@@ -49,7 +50,7 @@ describe 'chefs show page' do
 
   it "displays the 3 most popular ingredients a chef uses in his dishes" do
     visit chef_ingredients_path(@chef1)
-    
+
     within '.popular-ingredients' do
       expect(page).to have_content("eggs")
       expect(page).to have_content("flour")
