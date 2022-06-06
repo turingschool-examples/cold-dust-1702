@@ -18,6 +18,7 @@ RSpec.describe Chef, type: :model do
       @dish_2 = @chef_1.dishes.create!(name: "Roasted Chicken Linguini", description: "Creamy pasta")
       @dish_3 = @chef_1.dishes.create!(name: "Baked Ziti", description: "Red sauce with italian sausage")
       @dish_4 = @chef_2.dishes.create!(name: "Shrimp pasta", description: "Rose sauce with sauteed shrimp")
+      @dish_5 = @chef_1.dishes.create!(name: "Chicken Spaghetti", description: "Bell peppers and creamy chicken sauce")
 
       @chicken = Ingredient.create!(name: "Chicken", calories: 400)
       @noodles = Ingredient.create!(name: "Noodles", calories: 200)
@@ -32,11 +33,22 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create!(dish_id: @dish_3.id, ingredient_id: @sausage.id)    
       DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @shrimp.id)    
       DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @noodles.id)   
+      DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @noodles.id)   
+      DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @chicken.id)   
+      DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @peppers.id)   
     end
 
-    it 'returns the ingredients a chef uses' do
-      expect(@chef_1.chef_ingredients).to eq(["Bell Pepper", "Chicken", "Noodles", "Sausage"])
-      expect(@chef_2.chef_ingredients).to eq(["Noodles", "Shrimp"])
+    describe 'chef_ingredients' do
+      it 'returns the ingredients a chef uses' do
+        expect(@chef_1.chef_ingredients).to eq(["Bell Pepper", "Chicken", "Noodles", "Sausage"])
+        expect(@chef_2.chef_ingredients).to eq(["Noodles", "Shrimp"])
+      end
+    end
+
+    describe 'top_3_ingredients' do
+      it 'returns the three most populat ingredients the chef uses' do
+        expect(@chef_1.top_3_ingredients).to eq(["Bell Pepper", "Chicken", "Noodles"])
+      end
     end
   end
 end
