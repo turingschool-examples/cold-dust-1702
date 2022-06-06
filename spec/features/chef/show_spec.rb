@@ -14,6 +14,7 @@ RSpec.describe 'Chefs Show Page' do
 
   let!(:dish_ingredient1) { DishIngredient.create!(dish: dish, ingredient: ingredient1) }
   let!(:dish_ingredient2) { DishIngredient.create!(dish: dish, ingredient: ingredient2) }
+  let!(:dish_ingredient8) { DishIngredient.create!(dish: dish, ingredient: ingredient3) }
   let!(:dish_ingredient3) { DishIngredient.create!(dish: dish2, ingredient: ingredient3) }
   let!(:dish_ingredient4) { DishIngredient.create!(dish: dish2, ingredient: ingredient2) }
   let!(:dish_ingredient5) { DishIngredient.create!(dish: dish3, ingredient: ingredient4) }
@@ -38,7 +39,7 @@ RSpec.describe 'Chefs Show Page' do
 
     expect(page).to have_content('Kale')
     expect(page).to have_content('Tomato')
-    expect(page).to have_content('Bread')
-    expect(page).to_not have_content('Mushroom')
+    expect(page).to have_content('Mushroom')
+    expect(page).to_not have_content('Bread')
   end
 end
