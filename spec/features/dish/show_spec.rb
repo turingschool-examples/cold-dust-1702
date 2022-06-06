@@ -20,13 +20,14 @@ RSpec.describe 'dish show page', type: :feature do
     DishIngredient.create!(dish_id: @dish_3.id, ingredient_id: @sausage.id)
   end
 
-  it "displays the dish's name, desription, and list of ingredients" do
+  it "displays the dish's name, desription, list of ingredients, and chef's name" do
     visit "/dishes/#{@dish_1.id}"
     
     expect(page).to have_content("Chicken Enchiladas")
     expect(page).to have_content("Spicy enchiladas covered in cheese")
     expect(page).to have_content("Chicken")
     expect(page).to have_content("Bell Pepper")
+    expect(page).to have_content("Chef: Thomas")
     expect(page).to_not have_content("Roasted Chicken Linguini")
     expect(page).to_not have_content("Baked Ziti")
     expect(page).to_not have_content("Creamy pasta")
