@@ -3,4 +3,12 @@ class Chef <ApplicationRecord
   has_many :dishes
   has_many :ingredients, through: :dishes
 
+
+  def unique_ingredients
+    ingredients
+    .select("ingredients.name")
+    .distinct
+    .pluck("ingredients.name")
+
+  end
 end

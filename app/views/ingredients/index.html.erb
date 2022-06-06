@@ -1,5 +1,7 @@
 <h2>Chefs Ingredients</h2>
 
 <div class="ingredients" id="chefs-ingredients">
-  
+  <% @chef.unique_ingredients.each do |ingredient| %>
+  <p><%= ingredient %></p>
+  <% end %>
 </div>
