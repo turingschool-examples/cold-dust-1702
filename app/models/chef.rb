@@ -6,4 +6,12 @@ class Chef <ApplicationRecord
   def unique_ingredients
     ingredients.distinct.pluck(:name)
   end
+
+  def top_ingredients
+    ingredients
+    .group(:id)
+    .select('ingredients.*, COUNT(ingredients.id)')
+    .order('count desc')
+    .limit(3)
+  end
 end

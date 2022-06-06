@@ -8,6 +8,7 @@ describe 'chefs show page' do
     dish1 = @chef1.dishes.create!(name: "Pancakes", description: "Stack of 3 fluffy pancakes")
     dish2 = @chef1.dishes.create!(name: "Omelette", description: "Served with home fries")
     dish3 = chef2.dishes.create!(name: "Skillet", description: "Eggs, veg, and homies")
+    dish4 = @chef1.dishes.create!(name: "Crepes", description: "Berry and Brie")
 
     milk = Ingredient.create!(name: "milk", calories: 90)
     flour = Ingredient.create!(name: "flour", calories: 60)
@@ -16,9 +17,12 @@ describe 'chefs show page' do
     mushies = Ingredient.create!(name: "mushrooms", calories: 50)
 
     DishIngredient.create!(dish: dish1, ingredient: milk)
+    DishIngredient.create!(dish: dish2, ingredient: milk)
     DishIngredient.create!(dish: dish1, ingredient: flour)
+    DishIngredient.create!(dish: dish2, ingredient: flour)
     DishIngredient.create!(dish: dish1, ingredient: eggs)
     DishIngredient.create!(dish: dish2, ingredient: eggs)
+    DishIngredient.create!(dish: dish4, ingredient: eggs)
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     DishIngredient.create!(dish: dish3, ingredient: mushies)
     visit chef_path(@chef1)
@@ -33,12 +37,26 @@ describe 'chefs show page' do
     expect(current_path).to eq(chef_ingredients_path(@chef1))
 
     expect(page).to have_content("Rob's Ingredients:")
-    expect(page).to have_content("milk")
-    expect(page).to have_content("flour")
-    expect(page).to have_content("eggs", count: 1)
-    expect(page).to have_content("potatoes")
-    expect(page).to_not have_content("mushrooms")
+
+    within '.all-ingredients' do
+      expect(page).to have_content("milk", count: 1)
+      expect(page).to have_content("flour", count: 1)
+      expect(page).to have_content("eggs", count: 1)
+      expect(page).to have_content("potatoes")
+      expect(page).to_not have_content("mushrooms")
+    end
   end
 
+  it "displays the 3 most popular ingredients a chef uses in his dishes" do
+    visit chef_ingredients_path(@chef1)
+    
+    within '.popular-ingredients' do
+      expect(page).to have_content("eggs")
+      expect(page).to have_content("flour")
+      expect(page).to have_content("milk")
+      expect(page).to_not have_content("potatoes")
+    end
+
+  end
 
 end
