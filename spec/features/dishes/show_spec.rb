@@ -27,4 +27,10 @@ RSpec.describe 'Merchant Show Dash', type: :feature do
     expect(page).to have_content(@sauce.name)
     expect(page).to have_content(@cheese.name)
   end
+
+  it "has the chef's name on the show page" do
+    visit "/dishes/#{@spaghetti.id}"
+
+    expect(page).to have_content(@jimbob.name)
+  end
 end
