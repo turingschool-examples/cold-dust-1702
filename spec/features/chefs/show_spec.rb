@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe 'chefs show page' do
   before do
-    chef1 = Chef.create!(name: "Rob")
+    @chef1 = Chef.create!(name: "Rob")
     chef2 = Chef.create!(name: "Emmanuel")
 
-    dish1 = chef1.dishes.create!(name: "Pancakes", description: "Stack of 3 fluffy pancakes")
-    dish2 = chef1.dishes.create!(name: "Omelette", description: "Served with home fries")
+    dish1 = @chef1.dishes.create!(name: "Pancakes", description: "Stack of 3 fluffy pancakes")
+    dish2 = @chef1.dishes.create!(name: "Omelette", description: "Served with home fries")
     dish3 = chef2.dishes.create!(name: "Skillet", description: "Eggs, veg, and homies")
 
     milk = Ingredient.create!(name: "milk", calories: 90)
@@ -21,7 +21,7 @@ describe 'chefs show page' do
     DishIngredient.create!(dish: dish2, ingredient: eggs)
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     DishIngredient.create!(dish: dish3, ingredient: mushies)
-    visit chef_path(chef1)
+    visit chef_path(@chef1)
   end
 
   it "displays the chef's name and a link to all the ingredients they use in their dishes" do
@@ -29,11 +29,16 @@ describe 'chefs show page' do
     expect(page).to_not have_content("Emmanuel")
 
     click_link("Click Here to See Rob's Ingredients")
-    
+
+    expect(current_path).to eq(chef_ingredients_path(@chef1))
+
+    expect(page).to have_content("Rob's Ingredients:")
     expect(page).to have_content("milk")
     expect(page).to have_content("flour")
     expect(page).to have_content("eggs", count: 1)
     expect(page).to have_content("potatoes")
     expect(page).to_not have_content("mushrooms")
   end
+
+
 end
