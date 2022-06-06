@@ -6,4 +6,14 @@ class Chef <ApplicationRecord
   def no_duplicates
     ingredients.distinct
   end
+
+  def most_popular
+    # binding.pry
+    ingredients
+    .group(:id)
+    .select('ingredients.name, count(ingredients.name)')
+    .order(count: :desc)
+    .limit(3)
+    .pluck(:name)
+  end
 end

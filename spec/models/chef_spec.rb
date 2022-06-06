@@ -54,7 +54,7 @@ RSpec.describe Chef, type: :model do
     end
 
     it 'returns the 3 most popular ingredients' do 
-      expect(chef2.most_popular).to eq([pickles, beef, bun])
+      expect(chef2.most_popular).to eq([pickles.name, bun.name, beef.name])
     end
   end
 end
