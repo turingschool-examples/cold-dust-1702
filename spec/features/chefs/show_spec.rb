@@ -20,8 +20,6 @@ RSpec.describe 'Chef show page', type: :feature do
   let!(:pickles) {Ingredient.create!(name: 'pickles', calories: 10)}
   let!(:egg) {Ingredient.create!(name: 'egg', calories: 300)}
 
-
-
   let!(:ingredient_dish1) {IngredientDish.create!(dish: warmest_color, ingredient: beef)}
   let!(:ingredient_dish2) {IngredientDish.create!(dish: warmest_color, ingredient: blue)}
   let!(:ingredient_dish3) {IngredientDish.create!(dish: warmest_color, ingredient: bbq)}
@@ -38,7 +36,6 @@ RSpec.describe 'Chef show page', type: :feature do
   let!(:ingredient_dish12) {IngredientDish.create!(dish: cheesers, ingredient: egg)}
   let!(:ingredient_dish13) {IngredientDish.create!(dish: cheesers, ingredient: beef)}
   let!(:ingredient_dish14) {IngredientDish.create!(dish: cheesers, ingredient: bun)}
-
 
   describe 'user story 3' do 
     it 'has the chef and a link to all of that chefs ingredients' do 
@@ -64,7 +61,7 @@ RSpec.describe 'Chef show page', type: :feature do
   describe 'extension' do 
     xit 'lists the three most popular ingredients' do 
       visit "/chefs/#{chef2.id}"
-      save_and_open_page
+
       within '#mostPopular' do 
         expect(page).to have_content('bun')
         expect(page).to have_content('patty')

@@ -45,7 +45,6 @@ RSpec.describe Chef, type: :model do
   let!(:ingredient_dish13) {IngredientDish.create!(dish: cheesers, ingredient: beef)}
   let!(:ingredient_dish14) {IngredientDish.create!(dish: cheesers, ingredient: bun)}
 
-
   describe 'instance methods' do 
     it 'returns one of each ingredient' do 
       expect(chef2.no_duplicates).to eq([beef, blue, bbq, bun, spicy_mustard, hot_kraut, kielbasa, pickles, egg])
