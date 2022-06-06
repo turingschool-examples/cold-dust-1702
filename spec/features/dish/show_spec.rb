@@ -21,7 +21,7 @@ RSpec.describe 'dish show page', type: :feature do
   end
 
   it "displays the dish's name, desription, and list of ingredients" do
-    visit "/dish/#{@dish_1.id}"
+    visit "/dishes/#{@dish_1.id}"
     
     expect(page).to have_content("Chicken Enchiladas")
     expect(page).to have_content("Spicy enchiladas covered in cheese")
