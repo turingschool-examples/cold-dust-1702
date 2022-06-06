@@ -39,7 +39,6 @@ RSpec.describe 'dishes show page' do
 
   it 'displays the dishs name, description, a list of ingredients for that dish, and the chefs name' do
     visit "/dishes/#{@pene.id}"
-save_and_open_page
     expect(page).to have_content("Pene")
     expect(page).to have_content("pasta w/ sauce")
     expect(page).to have_content("Pasta")
