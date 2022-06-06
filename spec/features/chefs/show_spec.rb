@@ -33,7 +33,7 @@ RSpec.describe 'chef show page' do
 
     click_link('Favorite Ingredients')
 
-    expect(current_path).to eq("/chef/#{chef.id}/ingredients")
+    expect(current_path).to eq("/chefs/#{chef.id}/ingredients")
 
     expect(page).to have_content('lettuce')
 
