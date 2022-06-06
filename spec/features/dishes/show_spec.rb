@@ -30,4 +30,12 @@ RSpec.describe 'Dishes Show Page' do
 
     expect(page).to have_content('Remy')
   end
+
+  it 'lists total calorie count for the dish' do
+    visit dish_path(dish.id)
+
+    within('#total_calories') do
+      expect(page).to have_content(150)
+    end
+  end
 end
