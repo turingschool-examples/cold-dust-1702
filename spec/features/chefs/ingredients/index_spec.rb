@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.desribe "Ingredients Index Page" do
+RSpec.describe "Ingredients Index Page" do
   it "shows ingredients used by this chef" do
     chef = Chef.create!(name: "Julia Adults")
     dish1 = chef.dishes.create!(name: "Pizza", description: "It's a pizza.")
@@ -19,9 +19,11 @@ RSpec.desribe "Ingredients Index Page" do
 
     visit chef_ingredients_path(chef)
 
-    expect(page).to have_content("dough")
-    expect(page).to have_content("sauce", count: 1)
-    expect(page).to have_content("cheese", count: 1)
-    expect(page).to have_content("spaghetti")
+    within "#ingredients" do
+      expect(page).to have_content("dough")
+      expect(page).to have_content("sauce", count: 1)
+      expect(page).to have_content("cheese", count: 1)
+      expect(page).to have_content("spaghetti")
+    end
   end
 end
