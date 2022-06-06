@@ -1,5 +1,8 @@
 <h1><%= @dish.name %></h1>
 <h2><%= @dish.description %></h2>
+<div id="total_calories">
+  <%= @dish.total_calorie_count %>
+</div>
 
 <h2>Ingredients:</h2>
 <% @dish.ingredients.each do |ingredient| %>
@@ -7,3 +10,4 @@
 <% end %>
 
 <h2>Chef: <%= @dish.chef.name %></h2>
+
