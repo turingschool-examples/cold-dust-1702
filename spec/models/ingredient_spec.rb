@@ -4,7 +4,7 @@ RSpec.describe Ingredient, type: :model do
 
   describe 'references' do
     it { should have_many :dish_ingredients }
-    it { should have_many :dishes, through: :dish_ingredients }
+    it { should have_many(:dishes).through(:dish_ingredients)  }
   end
-  
+
 end
