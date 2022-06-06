@@ -10,4 +10,18 @@ RSpec.describe Dish, type: :model do
     it { should have_many :dish_ingredients }
     it { should have_many :ingredients }
   end
+  describe 'instance methods' do
+    let!(:chef) { Chef.create!(name: 'Remy') }
+
+    let!(:dish) { chef.dishes.create!(name: 'Salad', description: 'Green and leafy!') }
+
+    let!(:ingredient1) { Ingredient.create!(name: 'Kale', calories: 100, dish: dish) }
+    let!(:ingredient2) { Ingredient.create!(name: 'Tomato', calories: 50, dish: dish) }
+
+    let!(:dish_ingredient1) { DishIngredient.create!(dish: dish, ingredient: ingredient1) }
+    let!(:dish_ingredient2) { DishIngredient.create!(dish: dish, ingredient: ingredient2) }
+    it 'calculates total calories for a dish' do
+      expect(dish.total_calorie_count).to eq(150)
+    end
+  end
 end
