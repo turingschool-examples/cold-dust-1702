@@ -1,3 +1,10 @@
-Chef <%= @chef.name %><br><br>
+Chef <%= @chef.name %>
+<br>
+
+<% @chef.popular_ingredients.each do |ingredient| %>
+  <%= ingredient.name %>
+<% end %>
+
+<br>
 
 <%= link_to 'Favorite Ingredients', chef_ingredients_path(chef_id: @chef.id) %>
