@@ -38,4 +38,11 @@ RSpec.describe 'Dishes::Show' do
       expect(page).to have_content(@chef1.name)
     end
   end
+
+  it 'shows calorie count for the dish' do
+    visit dish_path(@dish1)
+    within '#calorie-count' do
+      expect(page).to have_content(305)
+    end
+  end
 end
