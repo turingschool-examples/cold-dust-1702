@@ -26,7 +26,7 @@ describe 'chefs show page' do
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     DishIngredient.create!(dish: dish3, ingredient: mushies)
     visit chef_path(@chef1)
-    save_and_open_page
+
   end
 
   it "displays the chef's name and a link to all the ingredients they use in their dishes" do
@@ -36,7 +36,6 @@ describe 'chefs show page' do
     click_link("Click Here to See Rob's Ingredients")
 
     expect(current_path).to eq(chef_ingredients_path(@chef1))
-
     expect(page).to have_content("Rob's Ingredients:")
 
     within '.all-ingredients' do

@@ -16,6 +16,7 @@ describe 'dishes show page' do
     DishIngredient.create!(dish: dish1, ingredient: flour)
     DishIngredient.create!(dish: dish1, ingredient: eggs)
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
+    
     visit dish_path(dish1)
   end
 
