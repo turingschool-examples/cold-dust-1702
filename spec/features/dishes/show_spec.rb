@@ -36,7 +36,6 @@ RSpec.describe 'dish show page' do
     DishIngredient.create!(dish_id: dish.id, ingredient_id: gluten_free_croutons.id)
 
     visit "/dishes/#{dish.id}"
-
     expect(page).to have_content('Calories: 141')
   end
 end
