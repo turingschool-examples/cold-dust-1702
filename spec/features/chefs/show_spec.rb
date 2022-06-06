@@ -18,6 +18,7 @@ describe 'chefs show page' do
     DishIngredient.create!(dish: dish1, ingredient: milk)
     DishIngredient.create!(dish: dish1, ingredient: flour)
     DishIngredient.create!(dish: dish1, ingredient: eggs)
+    DishIngredient.create!(dish: dish2, ingredient: eggs)
     DishIngredient.create!(dish: dish2, ingredient: potatoes)
     DishIngredient.create!(dish: dish3, ingredient: mushies)
     visit chef_path(chef1)
@@ -26,7 +27,13 @@ describe 'chefs show page' do
   it "displays the chef's name and a link to all the ingredients they use in their dishes" do
     expect(page).to have_content("Rob")
     expect(page).to_not have_content("Emmanuel")
-    
+
     click_link("Click Here to See Rob's Ingredients")
+    
+    expect(page).to have_content("milk")
+    expect(page).to have_content("flour")
+    expect(page).to have_content("eggs", count: 1)
+    expect(page).to have_content("potatoes")
+    expect(page).to_not have_content("mushrooms")
   end
 end
