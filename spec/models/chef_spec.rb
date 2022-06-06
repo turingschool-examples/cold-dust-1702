@@ -34,8 +34,8 @@ RSpec.describe Chef, type: :model do
     end
 
     it 'returns the ingredients a chef uses' do
-      expect(@chef_1.ingredients).to eq([@chicken, @noodles, @sausage, @peppers])
-      expect(@chef_2.ingredients).to eq([@shrimp, @noodles])
+      expect(@chef_1.chef_ingredients).to eq(["Chicken", "Bell Pepper", "Noodles", "Sausage"])
+      expect(@chef_2.chef_ingredients).to eq(["Shrimp", "Noodles"])
     end
   end
 end
