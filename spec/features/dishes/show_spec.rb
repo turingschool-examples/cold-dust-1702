@@ -6,6 +6,7 @@ RSpec.describe 'Dishes Show Page', type: :feature do
 
   let!(:dish1) {chef1.dishes.create(name: "Macaroni and Cheese", description: "Delicious pasta and cheese")}
   let!(:dish2) {chef2.dishes.create(name: "Beef Wellington", description: "Medium Rare Beef with a bread cover")}
+
   let!(:ingredient1) {dish1.ingredients.create(name: "Pasta", calories: 400)}
   let!(:ingredient2) {dish1.ingredients.create(name: "Cheese", calories: 300)}
   let!(:ingredient3) {dish2.ingredients.create(name: "Beef", calories: 250)}
