@@ -27,6 +27,7 @@ RSpec.describe 'Dish show page', type: :feature do
       expect(page).to have_content(hotdog.name)
       expect(page).to have_content(helper.name)
       expect(page).to have_content(beef.name)
+      expect(page).to_not have_content(sand.name)
     end
 
     it 'has the chefs name' do 
