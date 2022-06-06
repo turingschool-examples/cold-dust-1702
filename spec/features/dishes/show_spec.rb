@@ -35,4 +35,13 @@ RSpec.describe 'Dishes Show Page', type: :feature do
       expect(page).to_not have_content("Gordon Ramsay")
     end
   end
+
+  it "can display the total amount of calories" do
+    visit "/dishes/#{dish1.id}"
+
+    within '#dish-data' do
+      expect(page).to have_content(700)
+    end
+
+  end
 end
