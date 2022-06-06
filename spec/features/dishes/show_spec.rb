@@ -45,5 +45,6 @@ RSpec.describe 'dishes show page' do
     expect(page).to have_content("Meat")
     expect(page).to_not have_content("Water")
     expect(page).to have_content("Chef: Emeril")
+    expect(page).to have_content("Total Calories: 700")
   end
 end
