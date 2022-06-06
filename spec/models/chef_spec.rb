@@ -13,6 +13,7 @@ RSpec.describe Chef, type: :model do
 
   let!(:warmest_color) {chef2.dishes.create!(name: 'blue is the warmest cheese', description: 'a blue cheese burger')}
   let!(:kraut_down) {chef2.dishes.create!(name: 'the final kraut down', description: 'a polish sausage with kraut')}
+  let!(:cheesers) {chef2.dishes.create!(name: 'eggers cant be cheesers', description: 'burger with a fried egg on it')}
 
   let!(:sand) {Ingredient.create!(name: 'sand', calories: 6)}
   let!(:beef) {Ingredient.create!(name: 'beef', calories: 5)}
@@ -23,6 +24,9 @@ RSpec.describe Chef, type: :model do
   let!(:hot_kraut) {Ingredient.create!(name: 'sour kraut', calories: 5000)}
   let!(:kielbasa) {Ingredient.create!(name: 'kielbasa sausage', calories: 5000)}
   let!(:pickles) {Ingredient.create!(name: 'pickles', calories: 10)}
+  let!(:egg) {Ingredient.create!(name: 'egg', calories: 300)}
+
+
 
   let!(:ingredient_dish1) {IngredientDish.create!(dish: warmest_color, ingredient: beef)}
   let!(:ingredient_dish2) {IngredientDish.create!(dish: warmest_color, ingredient: blue)}
@@ -36,11 +40,21 @@ RSpec.describe Chef, type: :model do
   let!(:ingredient_dish9) {IngredientDish.create!(dish: kraut_down, ingredient: kielbasa)}
   let!(:ingredient_dish10) {IngredientDish.create!(dish: kraut_down, ingredient: pickles)}
 
+  let!(:ingredient_dish11) {IngredientDish.create!(dish: cheesers, ingredient: pickles)}
+  let!(:ingredient_dish12) {IngredientDish.create!(dish: cheesers, ingredient: egg)}
+  let!(:ingredient_dish13) {IngredientDish.create!(dish: cheesers, ingredient: beef)}
+  let!(:ingredient_dish14) {IngredientDish.create!(dish: cheesers, ingredient: bun)}
+
+
   describe 'instance methods' do 
     it 'returns one of each ingredient' do 
-      expect(chef2.no_duplicates).to eq([beef, blue, bbq, bun, spicy_mustard, hot_kraut, kielbasa, pickles])
+      expect(chef2.no_duplicates).to eq([beef, blue, bbq, bun, spicy_mustard, hot_kraut, kielbasa, pickles, egg])
       expect(chef2.no_duplicates).to_not eq([beef, blue, bbq, bun, pickles, bun, spicy_mustard, hot_kraut, kielbasa, pickles])
       expect(chef2.no_duplicates).to_not include(sand)
+    end
+
+    it 'returns the 3 most popular ingredients' do 
+      expect(chef2.most_popular).to eq([pickles, beef, bun])
     end
   end
 end
