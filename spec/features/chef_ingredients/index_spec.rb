@@ -20,16 +20,17 @@ RSpec.describe 'Chefs ingredient index page', type: :feature do
   let!(:ingredient_dish2) {IngredientDish.create!(dish: warmest_color, ingredient: blue)}
   let!(:ingredient_dish3) {IngredientDish.create!(dish: warmest_color, ingredient: bbq)}
   let!(:ingredient_dish4) {IngredientDish.create!(dish: warmest_color, ingredient: bun)}
-  let!(:ingredient_dish4) {IngredientDish.create!(dish: warmest_color, ingredient: pickles)}
+  let!(:ingredient_dish5) {IngredientDish.create!(dish: warmest_color, ingredient: pickles)}
 
-  let!(:ingredient_dish5) {IngredientDish.create!(dish: kraut_down, ingredient: bun)}
-  let!(:ingredient_dish5) {IngredientDish.create!(dish: kraut_down, ingredient: spicy_mustard)}
-  let!(:ingredient_dish5) {IngredientDish.create!(dish: kraut_down, ingredient: hot_kraut)}
-  let!(:ingredient_dish5) {IngredientDish.create!(dish: kraut_down, ingredient: kielbasa)}
-  let!(:ingredient_dish5) {IngredientDish.create!(dish: kraut_down, ingredient: pickles)}
+  let!(:ingredient_dish6) {IngredientDish.create!(dish: kraut_down, ingredient: bun)}
+  let!(:ingredient_dish7) {IngredientDish.create!(dish: kraut_down, ingredient: spicy_mustard)}
+  let!(:ingredient_dish8) {IngredientDish.create!(dish: kraut_down, ingredient: hot_kraut)}
+  let!(:ingredient_dish9) {IngredientDish.create!(dish: kraut_down, ingredient: kielbasa)}
+  let!(:ingredient_dish10) {IngredientDish.create!(dish: kraut_down, ingredient: pickles)}
   describe 'user story 3' do 
     it 'has a unique list of all the ingredients from one chef' do
       visit "/chefs/#{chef2.id}/ingredients"
+      save_and_open_page
       expect(page).to have_content(beef.name)
       expect(page).to have_content(blue.name)
       expect(page).to have_content(bbq.name)
