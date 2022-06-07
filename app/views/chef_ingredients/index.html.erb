@@ -1,0 +1,6 @@
+<h1>Chef's Ingredients Index</h1>
+<br>
+<h2><%= @chef.name %> Uses These Ingredients:</h2>
+<% @chef.unique_ingredients.each do |ingredient| %>
+  <p><%= ingredient.name %></p>
+<% end %>
