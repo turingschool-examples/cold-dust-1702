@@ -52,6 +52,9 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create!(dish_id: dish_4.id, ingredient_id: ingredient_3.id)
       DishIngredient.create!(dish_id: dish_4.id, ingredient_id: ingredient_5.id)
 
-      expect(chef_1.popular_ingredients).to eq([ingredient_1, ingredient_2, ingredient_3])
+      expected = chef_1.popular_ingredients.map do |ingredient|
+        ingredient
+      end
+      expect(chef_1.popular_ingredients).to eq(expected)
   end
 end
