@@ -35,6 +35,5 @@ RSpec.describe "Dishes Show Page" do
     expect(page).to have_content("Beef")
     expect(page).to have_content("Bread")
     expect(page).to_not have_content("Carrots")
-
   end
 end
