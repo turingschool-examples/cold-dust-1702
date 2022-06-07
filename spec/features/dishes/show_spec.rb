@@ -9,14 +9,27 @@ RSpec.describe 'dish show' do
     DishIngredient.create!(dish_id: dish_1.id, ingredient_id: ingredient_1.id)
     DishIngredient.create!(dish_id: dish_1.id, ingredient_id: ingredient_2.id)
 
-    visit "/dishes/#{dish_1.id}"
-# require "pry"; binding.pry
+    visit dish_path(dish_1)
+  
+    within '#name' do
       expect(page).to have_content("Dish: Chicken Rice")
-      expect(page).to have_content("Description: This is a local Singaporean dish")
-      expect(page).to have_content("Chef: Lee Kwan Yew")
+    end
 
+    within '#description' do
+      expect(page).to have_content("Description: This is a local Singaporean dish")
+    end
+
+    within '#chefname' do
+      expect(page).to have_content("Chef: Lee Kwan Yew")
+    end
+
+    within '#ingredients' do
       expect(page).to have_content("chicken")
       expect(page).to have_content("rice")
+    end
+
+    within '#calories' do
       expect(page).to have_content("Total Calories: 1600")
+    end
   end
 end
