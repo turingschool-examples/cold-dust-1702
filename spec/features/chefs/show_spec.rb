@@ -1,15 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-    it {should have_many(:dish_ingredients).through(:dishes)}
-    it {should have_many(:ingredients).through(:dish_ingredients)}
-  end
-
+RSpec.describe "Chef show page", type: :feature do
   ina = Chef.create(name: "Ina Garten")
   bobby = Chef.create(name: "Bobby Flay")
 
@@ -54,21 +45,53 @@ RSpec.describe Chef, type: :model do
   add_ingredient17 = DishIngredient.create(dish: pizza, ingredient: flour)
   add_ingredient18 = DishIngredient.create(dish: pizza, ingredient: tomato)
   add_ingredient19 = DishIngredient.create(dish: pizza, ingredient: cheese)
+  describe "Story 3 of 3" do
+    # As a visitor
+    # When I visit a chef's show page
+    # I see the name of that chef
+    # And I see a link to view a list of all ingredients that this chef uses in their dishes
+    # When I click on that link
+    # I'm taken to a chef's ingredient index page
+    # and I can see a unique list of names of all the ingredients that this chef uses
+    it "has the chef's name" do
+      visit chef_path(ina.id)
 
-  describe "#instance_methods" do
-    it "#unique_ingredients returns a list of unique ingredients" do
-      names_array = ina.unique_ingredients.pluck(:name)
-      expect(names_array.count(tomato.name)).to eq(1)
-      expect(names_array.count(flour.name)).to eq(1)
-      expect(names_array.count(egg.name)).to eq(1)
-      expect(names_array.count(butter.name)).to eq(1)
-      expect(names_array.count(sugar.name)).to eq(1)
-      expect(names_array.count(cheese.name)).to eq(0)
-      expect(names_array.count(pepper.name)).to eq(0)
+      expect(page).to have_content("Ina Garten")
     end
 
-    it "#top_3_ingredients returns the top 3 ingredients used by the chef" do
-      expect(bobby.top_3_ingredients).to eq([flour, tomato, cheese])
+    it "has a link that takes you to this chef's ingredient index page" do
+      visit chef_path(ina.id)
+
+      click_link "View This Chef's Ingredients"
+
+      expect(current_path).to eq("/chefs/#{ina.id}/ingredients")
+    end
+
+    it "chef's ingredient index page has a unique list of names of all the ingredients that this chef uses" do
+      visit chef_ingredients_path(ina.id)
+
+      expect(page).to have_content(tomato.name, count: 1)
+      expect(page).to have_content(flour.name, count: 1)
+      expect(page).to have_content(egg.name, count: 1)
+      expect(page).to have_content(butter.name, count: 1)
+      expect(page).to have_content(sugar.name, count: 1)
+      expect(page).to_not have_content(cheese.name)
+      expect(page).to_not have_content(pepper.name)
+    end
+  end
+
+  describe "Extension" do
+    # As a visitor
+    # When I visit a chef's show page
+    # I see the three most popular ingredients that the chef uses in their dishes
+    # (Popularity is based off of how many dishes use that ingredient)
+    it "shows the three most popular ingredients" do
+      visit chef_path(bobby.id)
+
+      expect(page).to have_content("1. #{flour.name}") # used 3 times
+      expect(page).to have_content("2. #{tomato.name}") # used twice, has a lower id than cheese
+      expect(page).to have_content("3. #{cheese.name}") # used twice, has a lower id than egg
+      # tomato, cheese, and egg are tied so we're also ordering by :id and egg gets bumped...sorry egg
     end
   end
 end
