@@ -30,7 +30,7 @@ RSpec.describe "Dishes Show Page" do
     expect(current_path).to eq("/chefs/#{lou.id}/ingredients")
     save_and_open_page
     # and I can see a unique list of names of all the ingredients that this chef uses
-    expect(page).to have_content("Chef #{lou.id}'s Ingredients:")
+    expect(page).to have_content("Chef #{lou.name}'s Ingredients:")
     expect(page).to have_content("Cheese")
     expect(page).to have_content("Beef")
     expect(page).to have_content("Bread")
