@@ -14,5 +14,4 @@ class Chef <ApplicationRecord
           .limit(3)
           .pluck("ingredients.name")
   end
-
 end
