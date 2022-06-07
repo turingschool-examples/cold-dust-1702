@@ -49,7 +49,7 @@ RSpec.describe "Chef#Show" do
     dish_ingre11 = DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingre2.id) ####
 
     visit chef_path(chef)
-
+save_and_open_page
     within "#favorite_ingredients" do
       expect(page).to have_content("sauce")
       expect(page).to have_content("cheese")

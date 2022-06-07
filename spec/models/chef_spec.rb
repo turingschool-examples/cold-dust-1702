@@ -57,7 +57,7 @@ RSpec.describe Chef, type: :model do
       dish4 = chef.dishes.create!(name: "Just Sauce", description: "Seriously, it's just pasta sauce.")
       dish_ingre11 = DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingre2.id) ####
 
-      expect(chef.favorite_ingredients).to eq(["sauce", "cheese", "meatball"])
+      expect(chef.favorite_ingredients).to eq([ingre2, ingre3, ingre5])
     end
   end
 end

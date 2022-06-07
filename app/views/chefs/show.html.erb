@@ -1,2 +1,9 @@
 Name: <%= @chef.name %><br>
-<%= link_to "All Ingredients", chef_ingredients_path(@chef) %>
+<%= link_to "All Ingredients", chef_ingredients_path(@chef) %><br><br>
+
+Most Popular Ingredients:<br>
+<div id="favorite_ingredients">
+  <ol><% @chef.favorite_ingredients.each do |ingre| %>
+    <li><%= ingre.name %></li>
+  <% end %></ol>
+</div>

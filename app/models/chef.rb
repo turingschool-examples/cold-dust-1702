@@ -6,4 +6,8 @@ class Chef <ApplicationRecord
   def used_ingredients
     ingredients.select('ingredients.name').distinct(:name).pluck(:name)
   end
+
+  def favorite_ingredients
+    ingredients.group('ingredients.id').order(Arel.sql('count(ingredients.id) desc')).limit(3)
+  end
 end
