@@ -1,3 +1,5 @@
 <h3>Ingredient List:</h3>
 
-<%= @chef.all_ingredients.delete("[]") %>
+<% @ingredients.each do |ingredient| %>
+  <%= ingredient %>
+<% end %>

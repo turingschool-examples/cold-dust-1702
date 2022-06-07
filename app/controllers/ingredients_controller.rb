@@ -2,6 +2,6 @@ class IngredientsController < ApplicationController
 
   def index
     @chef = Chef.find(params[:id])
-    # @ingredients = @chef.all_ingredients
+    @ingredients = @chef.all_ingredients
   end
 end
