@@ -17,11 +17,11 @@ RSpec.describe "Dishes show page" do
     @dish2.dish_ingredients.create!(ingredient_id: @ing2.id)
     @dish1.dish_ingredients.create!(ingredient_id: @ing4.id)
     @dish1.dish_ingredients.create!(ingredient_id: @ing3.id)
+
+    visit dish_path(@dish2)
   end
 
   it "shows dish name, description, ingredients, and chef" do
-    visit dish_path(@dish2)
-
     expect(page).to have_content('ham and cheese')
     expect(page).to have_content('cheesy')
     expect(page).to have_content('pork')
@@ -33,5 +33,9 @@ RSpec.describe "Dishes show page" do
     expect(page).to_not have_content('broth')
     expect(page).to_not have_content('beef')
     expect(page).to_not have_content('Bob')
+  end
+
+  it "should show total calorie count" do
+    expect(page).to have_content("Total Calories: 300")
   end
 end
