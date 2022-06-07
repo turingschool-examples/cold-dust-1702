@@ -12,6 +12,5 @@ class Chef <ApplicationRecord
                 .order(count: :desc)
                 .group('ingredients.name')
                 .limit(3)
-                binding.pry
   end
 end
