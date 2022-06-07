@@ -66,5 +66,9 @@ RSpec.describe Chef, type: :model do
       expect(names_array.count(cheese.name)).to eq(0)
       expect(names_array.count(pepper.name)).to eq(0)
     end
+
+    it "#top_3_ingredients returns the top 3 ingredients used by the chef" do
+      expect(bobby.top_3_ingredients).to eq([flour, tomato, cheese])
+    end
   end
 end

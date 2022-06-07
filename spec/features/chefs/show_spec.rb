@@ -90,7 +90,8 @@ RSpec.describe "Chef show page", type: :feature do
 
       expect(page).to have_content("1. #{flour.name}")
       expect(page).to have_content("2. #{tomato.name}")
-      expect(page).to have_content("3. #{cheese.name}")# tomato, cheese, and egg are tied so we're also ordering by :id...sorry egg
+      expect(page).to have_content("3. #{cheese.name}")
+      # tomato, cheese, and egg are tied so we're also ordering by :id and egg gets bumped...sorry egg
     end
   end
 end
