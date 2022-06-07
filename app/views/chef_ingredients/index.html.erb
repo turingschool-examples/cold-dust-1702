@@ -1,6 +1,4 @@
 <h1>Ingerdients</h1>
-<% @chef.dishes.each do |dish| %>
-<% dish.ingredients.each do |ing| %>
-<%= ing.name %> 
-<% end %>
+<% @chef.chef_ingredients.each do |ing| %>
+<%= ing.name %>
 <% end %>
