@@ -1,0 +1,8 @@
+<%= @chef.name %>
+Top 3 Ingredients:
+<div id="top_3">
+<% @chef.top_3_ingredients.each do |top3| %>
+<%= top3.name %>
+<% end %>
+</div>
+<%= link_to "Ingredients",  "/chefs/#{@chef.id}/ingredients" %>
