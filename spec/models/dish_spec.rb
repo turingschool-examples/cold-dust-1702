@@ -6,8 +6,9 @@ RSpec.describe Dish, type: :model do
     it {should validate_presence_of :description}
   end
   describe "relationships" do
-    it {should belong_to :chef}
+    it {should belong_to (:chef)}
     it {should have_many(:dishes_ingredients)}
     it {should have_many(:ingredients).through(:dishes_ingredients)}
   end
+
 end
