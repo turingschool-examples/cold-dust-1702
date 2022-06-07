@@ -8,4 +8,13 @@ class Dish < ApplicationRecord
   def the_cook
     self.chef.name
   end
+
+  def total_calories
+    # self.joins(:ingredients)
+    # .select('sum(ingredients.calories)')
+    # .pluck(:sum)
+    ingredients.map do |ingredient|
+      ingredient.calories
+    end.sum
+  end
 end
