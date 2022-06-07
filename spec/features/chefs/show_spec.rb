@@ -31,6 +31,12 @@ RSpec.describe 'chef show page' do
 
     click_link('All Ingredients Used by this Chef')
 
-    expect(current_path).to eq("/chefs/#{@chef1.id}/ingredients") 
+    expect(current_path).to eq("/chefs/#{@chef1.id}/ingredients")
+
+    expect(page).to have_content(@ingredient1.name)
+    expect(page).to have_content(@ingredient2.name)
+    expect(page).to have_content(@ingredient5.name)
+    expect(page).to_not have_content(@ingredient3.name)
+    expect(page).to_not have_content(@ingredient4.name)
   end
 end
