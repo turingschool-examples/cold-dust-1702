@@ -7,3 +7,4 @@ Ingredients:
 <% end %>
 </ul>
 Chef: <%= @dish.chef.name %>
+Total Calories: <%= number_with_delimiter(@dish.calorie_count) %>

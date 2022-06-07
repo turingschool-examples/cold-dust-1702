@@ -42,6 +42,8 @@ RSpec.describe 'dish show page', type: :feature do
 
     it 'shows total calorie count' do
         visit "/dishes/#{@dish.id}"
-        expect(page).to have_content("Total Calories: 1350")
+        expect(page).to have_content("Total Calories: 1,350")
+        visit "/dishes/#{@dish2.id}"
+        expect(page).to have_content("Total Calories: 1,150")
     end
 end
