@@ -1,4 +1,6 @@
 <h1>Chef Ingredient Index</h1>
-<% @chef.ingredients.distinct.each do |ingredient| %>
-  <%= ingredient.name %>
+<% @chef.ingredients.distinct.each_with_index do |ingredient, index| %>
+<div id="ingredient-<%= index %>">
+  <p><%= ingredient.name %></p>
+</div>
 <% end %>

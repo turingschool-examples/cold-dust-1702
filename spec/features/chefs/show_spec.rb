@@ -35,10 +35,21 @@ RSpec.describe 'the chef show page' do
     click_link "#{@wolfgang.name}'s Ingredients"
 
     expect(current_path).to eq("/chefs/#{@wolfgang.id}/ingredients")
-    expect(page).to have_content(@pasta.name)
-    expect(page).to have_content(@tomatoes.name)
-    expect(page).to have_content(@sauce.name)
-    expect(page).to have_content(@veggies.name)
-    expect(page).to have_content(@cheese.name)
+
+    within("#ingredient-0") do
+      expect(page).to have_content(@pasta.name)
+    end
+    within("#ingredient-1") do
+      expect(page).to have_content(@tomatoes.name)
+    end
+    within("#ingredient-2") do
+      expect(page).to have_content(@sauce.name)
+    end
+    within("#ingredient-3") do
+      expect(page).to have_content(@cheese.name)
+    end
+    within("#ingredient-4") do
+      expect(page).to have_content(@veggies.name)
+    end
   end
 end
