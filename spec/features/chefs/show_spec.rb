@@ -38,8 +38,23 @@ RSpec.describe 'chefs show page' do
   end
   it 'displays the chefs name, a link to view a list of all ingredients the chef uses' do
     visit "chefs/#{@emeril.id}"
+    save_and_open_page
     expect(page).to have_content("Emeril")
     click_link 'Ingredients'
     expect(current_path).to eq("/chefs/#{@emeril.id}/ingredients")
+  end
+
+  it 'displays the chefs 3 most popular ingredients in order' do
+    @di_11 = DishIngredient.create!(dish_id: @pene.id, ingredient_id: @bread.id)
+    @di_12 = DishIngredient.create!(dish_id: @lasagna.id, ingredient_id: @bread.id)
+    @di_13 = DishIngredient.create!(dish_id: @pizza.id, ingredient_id: @bread.id)
+
+    visit "chefs/#{@emeril.id}"
+
+    within "#top_3" do
+      expect("Bread").to appear_before("Pasta")
+      expect("Pasta").to appear_before("Meat")
+      expect("Meat").to_not appear_before("Bread")
+    end
   end
 end

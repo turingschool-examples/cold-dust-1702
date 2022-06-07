@@ -1,3 +1,12 @@
 <h1><%= @chef.name %></h1>
 
-<%= link_to "Ingredients", "/chefs/#{@chef.id}/ingredients" %>
+<p><%= link_to "Ingredients", "/chefs/#{@chef.id}/ingredients" %></p>
+
+<div id='top_3'>
+Top 3 Ingredients
+<ul>
+<% @chef.top_3_ingredients.each do |ingredient| %>
+  <li><%= ingredient.name %></li>
+  <% end %>
+</ul>
+</div>

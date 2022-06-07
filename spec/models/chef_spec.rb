@@ -47,5 +47,28 @@ RSpec.describe Chef, type: :model do
       
       expect(@emeril.ingredients_uniq).to eq(["Pasta", "Meat", "Bread"])
     end
+
+    it 'can give a chefs top 3 ingredients in order' do
+      @emeril = Chef.create!(name: "Emeril")
+
+      @pene = @emeril.dishes.create!(name: "Pene", description: "pasta w/ sauce")
+      @lasagna = @emeril.dishes.create!(name: "Lasagna", description: "Layers of cheese, meat, and dough")
+      @pizza = @emeril.dishes.create!(name: "Pizza", description: "Marinara")
+
+      @meat = Ingredient.create!(name: "Meat", calories: 300)
+      @pasta = Ingredient.create!(name: "Pasta", calories: 400)
+      @bread = Ingredient.create!(name: "Bread", calories: 200)
+      @water = Ingredient.create!(name: "Meat", calories: 100)
+
+      @di_1 = DishIngredient.create!(dish_id: @pene.id, ingredient_id: @pasta.id)
+      @di_10 = DishIngredient.create!(dish_id: @pene.id, ingredient_id: @meat.id)
+      @di_2 = DishIngredient.create!(dish_id: @lasagna.id, ingredient_id: @pasta.id)
+      @di_3 = DishIngredient.create!(dish_id: @pizza.id, ingredient_id: @bread.id)
+      @di_11 = DishIngredient.create!(dish_id: @pene.id, ingredient_id: @bread.id)
+      @di_12 = DishIngredient.create!(dish_id: @lasagna.id, ingredient_id: @bread.id)
+      @di_13 = DishIngredient.create!(dish_id: @pizza.id, ingredient_id: @bread.id)
+
+      expect(@emeril.top_3_ingredients()).to eq([@bread, @pasta, @meat])
+    end
   end
 end
