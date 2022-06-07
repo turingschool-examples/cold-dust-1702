@@ -1,0 +1,10 @@
+<h1><%= @chef.name %></h1>
+<%= link_to "Ingredient Index", "/chefs/#{@chef.id}/ingredients" %>
+<div id=popular_ingredients>
+    <h1>Top 3 Ingredients:</h1>
+    <ul>
+        <% @chef.popular_ingredients.each do |ingredient| %>
+            <li><%= ingredient.name %></li>
+        <% end %>
+    </ul>
+</div>
