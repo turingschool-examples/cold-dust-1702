@@ -15,6 +15,7 @@ RSpec.describe Chef, type: :model do
   let!(:dish1) { chef1.dishes.create!(name: 'Fancy Mac', description: "Hands down the best mac you've ever had!") }
   let!(:dish2) { chef2.dishes.create!(name: 'Fancy Ramen', description: "Add a ramen egg to it!") }
   let!(:dish3) { chef2.dishes.create!(name: 'Korean Seaweed Soup', description: "Good health forever!") }
+  let!(:dish4) { chef2.dishes.create!(name: 'Tofu Noodle', description: "Noodles every day!") }
 
   let!(:ingredient1) { Ingredient.create!(name: 'Curly Noodles', calories: 150) }
   let!(:ingredient2) { Ingredient.create!(name: 'Cheese', calories: 200) }
@@ -25,10 +26,21 @@ RSpec.describe Chef, type: :model do
   let!(:dish_ingredient2) { DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingredient2.id) }
   let!(:dish_ingredient3) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient3.id) }
   let!(:dish_ingredient4) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient4.id) }
+  let!(:dish_ingredient5) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient1.id) }
+  let!(:dish_ingredient6) { DishIngredient.create!(dish_id: dish2.id, ingredient_id: ingredient1.id) }
+  let!(:dish_ingredient7) { DishIngredient.create!(dish_id: dish2.id, ingredient_id: ingredient5.id) }
+  let!(:dish_ingredient7) { DishIngredient.create!(dish_id: dish4.id, ingredient_id: ingredient3.id) }
+  let!(:dish_ingredient7) { DishIngredient.create!(dish_id: dish4.id, ingredient_id: ingredient1.id) }
 
   describe '#all_ingredients' do
     it "lists all ingredients a chef uses" do
-      expect(chef2.all_ingredients).to eq(['Tofu', 'Seaweed'])
+      expect(chef2.all_ingredients).to eq(['Tofu', 'Seaweed', 'Curly Noodles'])
+    end
+  end
+
+  describe '#most_popular_ingredients' do
+    it "displays the three most popular ingredients that the chef uses in their dishes" do
+      expect(chef2.most_popular_ingredients).to eq(['Curly Noodles', 'Tofu', 'Seaweed'])
     end
   end
 end

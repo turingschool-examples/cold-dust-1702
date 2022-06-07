@@ -1,3 +1,10 @@
 <h3>Chef <%= @chef.name %>'s Page</h3>
 
 <%= link_to 'See Ingredient List', "/chefs/#{@chef.id}/ingredients" %>
+
+<strong>Most Popular Ingredients: </strong>
+<div class="most-popular-ingredients">
+  <% @chef.most_popular_ingredients.each do |ingredient| %>
+    <%= ingredient %>
+  <% end %>
+</div>
