@@ -70,11 +70,11 @@ RSpec.describe "Chef show page", type: :feature do
       it "chef's ingredient index page has a unique list of names of all the ingredients that this chef uses" do
         visit "/chefs/#{ina.id}/ingredients"
 
-        expect(page).to have_content(tomato.name)
-        expect(page).to have_content(flour.name)
-        expect(page).to have_content(egg.name)
-        expect(page).to have_content(butter.name)
-        expect(page).to have_content(sugar.name)
+        expect(page).to have_content(tomato.name, count: 1)
+        expect(page).to have_content(flour.name, count: 1)
+        expect(page).to have_content(egg.name, count: 1)
+        expect(page).to have_content(butter.name, count: 1)
+        expect(page).to have_content(sugar.name, count: 1)
         expect(page).to_not have_content(cheese.name)
         expect(page).to_not have_content(pepper.name)
 
