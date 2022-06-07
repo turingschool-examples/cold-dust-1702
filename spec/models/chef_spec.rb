@@ -19,7 +19,6 @@ RSpec.describe Chef, type: :model do
       @meatball_sub = @wolfgang.dishes.create!(name: "Meatball Sub", description: "Delicious sandwich")
       @lasagna = @wolfgang.dishes.create!(name: "Lasagna", description: "Saucy cheesy")
 
-
       @pasta = Ingredient.create!(name: "Pasta noodles", calories: 300)
       @tomatoes = Ingredient.create!(name: "Tomatoes", calories: 25)
       @meatballs = Ingredient.create!(name: "Meatballs", calories: 456)
@@ -43,7 +42,5 @@ RSpec.describe Chef, type: :model do
     it 'determines most popular ingredients used by the chef' do
       expect(@wolfgang.popular_ingredients).to eq([@pasta, @cheese, @meatballs])
     end
-
-
   end
 end
