@@ -15,12 +15,12 @@ RSpec.describe "Dishes Show Page" do
   bread = Ingredient.create!(name: "Bread", calories: 500)
   dish_ingredient1 = DishIngredient.create!(dish_id: pizza.id, ingredient_id: cheese.id)
   dish_ingredient1 = DishIngredient.create!(dish_id: pizza.id, ingredient_id: bread.id)
-  dish_ingredient1 = DishIngredient.create!(dish_id: clazone.id, ingredient_id: cheese.id)
+  dish_ingredient1 = DishIngredient.create!(dish_id: calzone.id, ingredient_id: cheese.id)
   dish_ingredient1 = DishIngredient.create!(dish_id: calzone.id, ingredient_id: beef.id)
   dish_ingredient1 = DishIngredient.create!(dish_id: calzone.id, ingredient_id: bread.id)
 
   visit "/dishes/#{pizza.id}"
-
+  save_and_open_page
   expect(page).to have_content("Dish:")
   expect(page).to have_content("Cheese Pizza")
   expect(page).to have_content("Ingredients:")
