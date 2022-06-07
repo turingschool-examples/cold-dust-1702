@@ -39,7 +39,6 @@ RSpec.describe 'chef_ingredients index page' do
 
   it "displays a unique list of the names of all the ingrediens the chef uses" do
     visit "chefs/#{@emeril.id}/ingredients"
-save_and_open_page
     within "#ingredients" do
       expect(page).to have_content("Pasta")
       expect(page).to have_content("Meat")
