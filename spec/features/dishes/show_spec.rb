@@ -12,7 +12,7 @@ RSpec.describe 'dish show page' type: :feature do
         DishIngredient.create(dish_id: "#{@dish.id}", ingredient_id: "#{@ingredient.id}")
         DishIngredient.create(dish_id: "#{@dish.id}", ingredient_id: "#{@ingredient2.id}")
         DishIngredient.create(dish_id: "#{@dish2.id}", ingredient_id: "#{@ingredient3.id}")
-        DishIngredient.create(dish_id: "#{@dish.id}", ingredient_id: "#{@ingredient4.id}")
+        DishIngredient.create(dish_id: "#{@dish2.id}", ingredient_id: "#{@ingredient4.id}")
         DishIngredient.create(dish_id: "#{@dish.id}", ingredient_id: "#{@ingredient4.id}")
     end
 
@@ -26,10 +26,15 @@ RSpec.describe 'dish show page' type: :feature do
     end
 
     it 'shows a list of ingredients' do
-
+        visit "/dishes/#{@dish.id}"
+        expect(page).to have_content(@ingredient.name)
+        expect(page).to have_content(@ingredient2.name)
+        expect(page).to have_content(@ingredient4.name)
+        expect(page).to_not have_content(@ingredient3.name)
     end
 
     it 'shows the chefs name' do
-
+        visit "/dishes/#{@dish.id}"
+        expect(page).to have_content(@chef.name)
     end
 end
