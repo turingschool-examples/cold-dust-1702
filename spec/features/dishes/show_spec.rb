@@ -19,12 +19,15 @@ RSpec.describe 'dish show page' do
     @di2 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient2.id)
     @di3 = DishIngredient.create!(dish_id: @dish3.id, ingredient_id: @ingredient3.id)
     @di4 = DishIngredient.create!(dish_id: @dish4.id, ingredient_id: @ingredient4.id)
-
   end
-  it "displays the dish attributes, ingredients, and chef" do
-    visit "/dishes/:dish_id"
 
-    expect(page).to have_content
+  it "displays the dish attributes, ingredients, and chef" do
+    visit "/dishes/#{@dish1.id}"
+
+    expect(page).to have_content(@dish1.name)
+    expect(page).to have_content(@dish1.description)
+    expect(page).to have_content(@ingredient1.name)
+    expect(page).to have_content(@dish1.chef.name)
   end
 
 
