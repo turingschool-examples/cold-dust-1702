@@ -9,6 +9,6 @@ class Dish < ApplicationRecord
   end
 
   def total_calories
-    # binding.pry
+    ingredients.sum(:calories)
   end
 end
