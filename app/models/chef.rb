@@ -7,4 +7,13 @@ class Chef <ApplicationRecord
   def unique_ingredients
     ingredients.distinct
   end
+
+  def top_3_ingredients
+    ingredients
+    .select("ingredients.*, count(ingredients.id) AS total_count")
+    .group("ingredients.id")
+    .order(total_count: :desc)
+    .order(:id)
+    .limit(3)
+  end
 end
