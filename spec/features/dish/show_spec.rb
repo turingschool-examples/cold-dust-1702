@@ -4,11 +4,11 @@ RSpec.describe Dish, type: :feature do
   describe "visitors to dish show page" do
     before(:each) do
       @chef1 = Chef.create!(name: "Cliff")
-      @chef2 = Chef.create!(name: "Tony")
-
       @dish1 = @chef1.dishes.create!(name: "chicken", description: "good")
-      @dish2 = @chef2.dishes.create!(name: "fish", description: "poor")
       @dish3 = @chef1.dishes.create!(name: "beef", description: "great")
+      
+      @chef2 = Chef.create!(name: "Tony")
+      @dish2 = @chef2.dishes.create!(name: "fish", description: "poor")
       @dish4 = @chef2.dishes.create!(name: "veg", description: "practical")
 
       @ingredient1 = Ingredient.create!(name: "ginger", calories: 1)
@@ -34,20 +34,22 @@ RSpec.describe Dish, type: :feature do
     end
 
     it "will see dish name, description, chef name, and list of ingredients" do
+      save_and_open_page
+    
       within("#gen_info") do
-        expect(page).to have_content("Name: Chicken")
-        expect(page).to_not have_content("Name: Beef")
-        expect(page).to have_content("Description: Good")
+        expect(page).to have_content("Name: chicken")
+        expect(page).to_not have_content("Name: beef")
+        expect(page).to have_content("Description: good")
         expect(page).to have_content("Chef: Cliff")
         expect(page).to_not have_content("Chef: Tony")
       end 
-      within("#ingredients") do
+      within("#fixins") do
         expect(page).to have_content("ginger")
         expect(page).to have_content("sporty")
         expect(page).to have_content("old")
-        expedt(page).to_not have_content("posh")
-        expedt(page).to_not have_content("scary")
-        expedt(page).to_not have_content("baby")
+        expect(page).to_not have_content("posh")
+        expect(page).to_not have_content("scary")
+        expect(page).to_not have_content("baby")
       end
     end
   end

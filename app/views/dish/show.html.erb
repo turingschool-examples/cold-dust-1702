@@ -1,0 +1,13 @@
+<section id="gen_info">
+<h1><%="Name: #{@dish.name}" %></h1>
+<h3><%="Chef: #{@dish.chef.name}" %></h2><br>
+<%="Description: #{@dish.description}" %><br>
+</section>
+<section id="fixins">
+Ingredients<br>
+<% @dish.ingredients.each do |item| %>
+<%= item.name %><br>
+<% end %>
+</section>
+
+
