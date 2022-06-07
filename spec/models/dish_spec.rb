@@ -11,7 +11,7 @@ RSpec.describe Dish, type: :model do
     it { should have_many(:ingredients).through(:dish_ingredients) }
   end
 
-  describe "class methods" do
+  describe "instance methods" do
     describe "#dish_calories" do
       it "can count the calories in a dish" do
         lou = Chef.create!(name: "Lou Baron")
@@ -26,7 +26,8 @@ RSpec.describe Dish, type: :model do
         dish_ingredient1 = DishIngredient.create!(dish_id: calzone.id, ingredient_id: beef.id)
         dish_ingredient1 = DishIngredient.create!(dish_id: calzone.id, ingredient_id: bread.id)
 
-        expect(Dish.dish_calories).to eq(575)
+        expect(calzone.dish_calories).to eq(575)
+        expect(pizza.dish_calories).to eq(525)
       end
     end
   end
