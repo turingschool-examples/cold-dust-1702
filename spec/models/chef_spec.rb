@@ -63,7 +63,9 @@ RSpec.describe Chef, type: :model do
       dish_ingredient10 = cheesestick.dish_ingredients.create!(ingredient_id: @cheese.id)
       dish_ingredient11 = cheesestick.dish_ingredients.create!(ingredient_id: @croutons.id)
 
-      expect(@jimbob.top_three_ing).to eq([@cheese, @sauce, @crouton])
+      expect(@jimbob.top_three_ing[0].name).to eq(@cheese.name)
+      expect(@jimbob.top_three_ing[1].name).to eq(@sauce.name)
+      expect(@jimbob.top_three_ing[2].name).to eq(@croutons.name)
     end
   end
 end
