@@ -54,13 +54,13 @@ RSpec.describe "Chef show page", type: :feature do
     # I'm taken to a chef's ingredient index page
     # and I can see a unique list of names of all the ingredients that this chef uses
     it "has the chef's name" do
-      visit "/chefs/#{ina.id}"
+      visit chef_path(ina.id)
 
       expect(page).to have_content("Ina Garten")
     end
 
     it "has a link that takes you to this chef's ingredient index page" do
-      visit "/chefs/#{ina.id}"
+      visit chef_path(ina.id)
 
       click_link "View This Chef's Ingredients"
 
@@ -68,7 +68,7 @@ RSpec.describe "Chef show page", type: :feature do
     end
 
     it "chef's ingredient index page has a unique list of names of all the ingredients that this chef uses" do
-      visit "/chefs/#{ina.id}/ingredients"
+      visit chef_ingredients_path(ina.id)
 
       expect(page).to have_content(tomato.name, count: 1)
       expect(page).to have_content(flour.name, count: 1)
@@ -86,11 +86,11 @@ RSpec.describe "Chef show page", type: :feature do
     # I see the three most popular ingredients that the chef uses in their dishes
     # (Popularity is based off of how many dishes use that ingredient)
     it "shows the three most popular ingredients" do
-      visit "/chefs/#{bobby.id}"
+      visit chef_path(bobby.id)
 
-      expect(page).to have_content("1. #{flour.name}")
-      expect(page).to have_content("2. #{tomato.name}")
-      expect(page).to have_content("3. #{cheese.name}")
+      expect(page).to have_content("1. #{flour.name}") # used 3 times
+      expect(page).to have_content("2. #{tomato.name}") # used twice, has a lower id than cheese
+      expect(page).to have_content("3. #{cheese.name}") # used twice, has a lower id than egg
       # tomato, cheese, and egg are tied so we're also ordering by :id and egg gets bumped...sorry egg
     end
   end

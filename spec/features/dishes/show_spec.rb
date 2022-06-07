@@ -52,7 +52,7 @@ RSpec.describe "Dish show page", type: :feature do
     # And I see a list of ingredients for that dish
     # And I see the chef's name
     it "has the dish's name and description" do
-      visit "/dishes/#{pancakes.id}"
+      visit dish_path(pancakes.id)
 
       expect(page).to have_content("Pancakes")
       expect(page).to have_content("Another of Wes' favorites")
@@ -60,7 +60,7 @@ RSpec.describe "Dish show page", type: :feature do
     end
 
     it "has a list of ingredients for that dish" do
-      visit "/dishes/#{pancakes.id}"
+      visit dish_path(pancakes.id)
 
       expect(page).to have_content(sugar.name)
       expect(page).to have_content(flour.name)
@@ -70,7 +70,7 @@ RSpec.describe "Dish show page", type: :feature do
     end
 
     it "has the chef's name" do
-      visit "/dishes/#{pancakes.id}"
+      visit dish_path(pancakes.id)
 
       expect(page).to have_content(ina.name)
       expect(page).to_not have_content(bobby.name)
@@ -82,7 +82,7 @@ RSpec.describe "Dish show page", type: :feature do
     # When I visit a dish's show page
     # I see the total calorie count for that dish.
     it "has the total calorie count for the dish" do
-      visit "/dishes/#{spaghetti_bobby.id}"
+      visit dish_path(spaghetti_bobby.id)
 
       expect(page).to have_content("71.33 calories")
       expect(page).to_not have_content("26.33 calories")# for pizza
