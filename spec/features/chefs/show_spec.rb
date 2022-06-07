@@ -29,5 +29,16 @@ RSpec.describe 'the chef show page' do
     expect(page).to have_content(@wolfgang.name)
   end
 
-  
+  it 'has link to view all unique ingredient chef uses in their dishes' do
+    visit "/chefs/#{@wolfgang.id}"
+
+    click_link "#{@wolfgang.name}'s Ingredients"
+
+    expect(current_path).to eq("/chefs/#{@wolfgang.id}/ingredients")
+    expect(page).to have_content(@pasta.name)
+    expect(page).to have_content(@tomatoes.name)
+    expect(page).to have_content(@sauce.name)
+    expect(page).to have_content(@veggies.name)
+    expect(page).to have_content(@cheese.name)
+  end
 end
