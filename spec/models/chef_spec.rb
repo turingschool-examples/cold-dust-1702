@@ -56,7 +56,7 @@ RSpec.describe Chef, type: :model do
     end
 
     it 'shows 3 most popular ingredients used by chef' do
-      expect(@chef.popular_ingredients).to eq([@ingredient4, @ingredient2, @ingredient])
+      expect(@chef.popular_ingredients.to_a).to eq([@ingredient4, @ingredient, @ingredient2])
     end
   end
 end
