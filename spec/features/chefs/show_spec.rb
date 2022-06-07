@@ -38,7 +38,6 @@ RSpec.describe 'chefs show page' do
   end
   it 'displays the chefs name, a link to view a list of all ingredients the chef uses' do
     visit "chefs/#{@emeril.id}"
-    save_and_open_page
     expect(page).to have_content("Emeril")
     click_link 'Ingredients'
     expect(current_path).to eq("/chefs/#{@emeril.id}/ingredients")
