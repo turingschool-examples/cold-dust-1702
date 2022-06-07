@@ -1,15 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-  end
-
-  describe "methods" do
-       before(:each) do
+RSpec.describe Chef, type: :feature do
+  describe 'visitors to chef show page' do
+    before(:each) do
       @chef1 = Chef.create!(name: "Cliff")
       @dish1 = @chef1.dishes.create!(name: "chicken", description: "good")
       @dish3 = @chef1.dishes.create!(name: "beef", description: "great")
@@ -27,10 +20,16 @@ RSpec.describe Chef, type: :model do
       @dishes_ingredient6 = @ingredient6.dishes_ingredients.create!(dish_id: @dish3.id)
       @dishes_ingredient9 = @ingredient3.dishes_ingredients.create!(dish_id: @dish3.id)
       @dishes_ingredient11 = @ingredient6.dishes_ingredients.create!(dish_id: @dish1.id)
-       end
 
-    it "returns a unique of ingredients used by chef" do
-      expect(@chef1.drygoods).to match_array([@ingredient1, @ingredient2, @ingredient3, @ingredient5, @ingrediant6])
-    end
+      visit chef_show_path
+      
+      it 'will see the chefs name and a link to chef ingredient index'
+      expect(page).to have_content("Cliff")
+      expect(page).to have_link("Ingredients")
+      click_on "Ingredients"
+      expect(current_path).to eq("chef/#{@chef.id}/ingredients")
+      end
+
+
   end
 end
