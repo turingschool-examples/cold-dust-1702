@@ -4,6 +4,6 @@ class Chef < ApplicationRecord
   validates_presence_of :name
 
   def all_ingredients
-     dishes.joins(dish_ingredients: :ingredient).select("ingredients.*").pluck("ingredients.name")
+     dishes.joins(dish_ingredients: :ingredient).select("ingredients.*").pluck("ingredients.name").uniq
   end
 end

@@ -23,7 +23,7 @@ RSpec.describe "dish's show page" do
   let!(:dish_ingredient1) { DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingredient1.id) }
   let!(:dish_ingredient2) { DishIngredient.create!(dish_id: dish1.id, ingredient_id: ingredient2.id) }
   let!(:dish_ingredient3) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient3.id) }
-  let!(:dish_ingredient3) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient4.id) }
+  let!(:dish_ingredient4) { DishIngredient.create!(dish_id: dish3.id, ingredient_id: ingredient4.id) }
 
   before do
     visit chef_path(chef2)
