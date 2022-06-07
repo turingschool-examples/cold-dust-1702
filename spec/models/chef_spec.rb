@@ -47,7 +47,7 @@ RSpec.describe Chef, type: :model do
 
     describe 'top_3_ingredients' do
       it 'returns the three most populat ingredients the chef uses' do
-        expect(@chef_1.top_3_ingredients).to eq(["Bell Pepper", "Chicken", "Noodles"])
+        expect(@chef_1.top_3_ingredients).to eq(["Chicken",  "Noodles", "Bell Pepper"])
       end
     end
   end
