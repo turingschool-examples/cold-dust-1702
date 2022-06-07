@@ -52,5 +52,10 @@ RSpec.describe Dish, type: :feature do
         expect(page).to_not have_content("baby")
       end
     end
+
+    it "will display the total calories within the dish" do
+      expect(page).to have_content("Total Calories = 111")
+    end
+  
   end
 end
