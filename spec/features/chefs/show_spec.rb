@@ -31,4 +31,29 @@ RSpec.describe 'Chefs show page' do
     expect(page).to_not have_content("swiss cheese")
     expect(page).to_not have_content("pork")
   end
+
+  it "has a list of the three most popular ingredients used by the chef" do
+    dish3 = Dish.create!(name: 'steak', description: 'bloody', chef_id: @chef1.id)
+    dish4 = Dish.create!(name: 'steak sandwich', description: 'bloody sandwich', chef_id: @chef1.id)
+
+    ing5 = Ingredient.create!(name: "potatoes", calories: "100")
+    ing6 = Ingredient.create!(name: "salt", calories: "100")
+    ing7 = Ingredient.create!(name: "pepper", calories: "300")
+    ing8 = Ingredient.create!(name: "bread", calories: "400")
+
+    dish3.dish_ingredients.create!(ingredient_id: ing5.id)
+    dish3.dish_ingredients.create!(ingredient_id: ing6.id)
+    dish3.dish_ingredients.create!(ingredient_id: ing7.id)
+    dish3.dish_ingredients.create!(ingredient_id: ing8.id)
+    @dish1.dish_ingredients.create!(ingredient_id: ing8.id)
+    dish4.dish_ingredients.create!(ingredient_id: ing8.id)
+    dish4.dish_ingredients.create!(ingredient_id: ing6.id)
+    dish4.dish_ingredients.create!(ingredient_id: @ing4.id)
+
+    within "#top_3" do
+      expect(page).to have_content("beef")
+      expect(page).to have_content("bread")
+      expect(page).to have_content("salt")
+    end
+  end
 end
