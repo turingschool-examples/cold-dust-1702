@@ -1,0 +1,10 @@
+<h3>Chef <%= @chef.name %>'s Page</h3>
+
+<%= link_to 'See Ingredient List', "/chefs/#{@chef.id}/ingredients" %>
+
+<strong>Most Popular Ingredients: </strong>
+<div class="most-popular-ingredients">
+  <p>1. <%= @chef.most_popular_ingredients[0] %></p>
+  <p>2. <%= @chef.most_popular_ingredients[1] %></p>
+  <p>3. <%= @chef.most_popular_ingredients[2] %></p>
+</div>

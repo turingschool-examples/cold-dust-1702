@@ -40,6 +40,10 @@ Two migrations have been made for you. The one to many relationship has been set
 
 (Note: The plural of dish is dishes. The plural of chef is chefs.)
 
+## Database Diagram
+![Screen Shot 2022-06-06 at 4 30 40 PM](https://user-images.githubusercontent.com/99001315/172259922-36475ec4-eecb-4f73-a728-f0150c3cb1c0.png)
+
+
 ## User Stories
 
 Order up is an app that tracks chefs, the dishes that they make, and the ingredients that are in those dishes. Chef's have many dishes. Dishes belong to a chef. Dishes have many Ingredients and Ingredients have many dishes. Ingredients should have a name and calories.

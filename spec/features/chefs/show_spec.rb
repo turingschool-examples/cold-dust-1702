@@ -1,14 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "relationships" do
-    it { should have_many :dishes }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of :name }
-  end
-
+RSpec.describe "chef's show page" do
   let!(:chef1) { Chef.create!(name: "Marion") }
   let!(:chef2) { Chef.create!(name: "Maangchi") }
 
@@ -31,15 +23,33 @@ RSpec.describe Chef, type: :model do
   let!(:dish_ingredient8) { DishIngredient.create!(dish_id: dish4.id, ingredient_id: ingredient3.id) }
   let!(:dish_ingredient9) { DishIngredient.create!(dish_id: dish4.id, ingredient_id: ingredient1.id) }
 
-  describe '#unique_ingredients' do
-    it "lists all ingredients a chef uses" do
-      expect(chef2.unique_ingredients).to eq(['Tofu', 'Seaweed', 'Curly Noodles'])
-    end
+  before do
+    visit chef_path(chef2)
   end
 
-  describe '#most_popular_ingredients' do
-    xit "displays the three most popular ingredients that the chef uses in their dishes" do
-      expect(chef2.most_popular_ingredients).to eq(['Curly Noodles', 'Tofu', 'Seaweed'])
+  it "displays the chef's name" do
+    expect(page).to have_content('Maangchi')
+  end
+
+  it "can click a link to view a list of all ingredients that this chef uses in their dishes" do
+    click_link "See Ingredient List"
+
+    expect(current_path).to eq("/chefs/#{chef2.id}/ingredients")
+    expect(page).to have_content('Tofu')
+    expect(page).to have_content('Seaweed')
+    expect(page).to have_content('Curly Noodles')
+    expect(page).to_not have_content('Cheese')
+  end
+
+# As a visitor
+# When I visit a chef's show page
+# I see the three most popular ingredients that the chef uses in their dishes
+# (Popularity is based off of how many dishes use that ingredient)
+
+  xit "displays the three most popular ingredients that the chef uses in their dishes" do
+    within 'most_popular_ingredients' do
+      expect('Curly Noodles').to appear_before('Tofu')
+      expect('Tofu').to appear_before('Seaweed')
     end
   end
 end
