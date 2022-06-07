@@ -5,3 +5,4 @@ Ingredients: <% @dish.ingredients.each do |ingredient| %>
                 <%= ingredient.name %>
               <% end %>
 Chef: <%= @dish.chef.name %>
+Calories in this dish: <%= @dish.calorie_count %>

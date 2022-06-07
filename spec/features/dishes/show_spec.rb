@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'the dish show page' do
-# As a visitor
-# When I visit a dish's show page
-# I see the dish’s name and description
-# And I see a list of ingredients for that dish
-# And I see the chef's name
   before(:each)do
     @wolfgang = Chef.create!(name: "Wolfgang Puck")
 
@@ -38,7 +33,7 @@ RSpec.describe 'the dish show page' do
     expect(page).to have_content("Wolfgang Puck")
   end
 
-  xit 'displays total calorie count for dish' do
+  it 'displays total calorie count for dish' do
     visit "/dishes/#{@spaghetti.id}"
 
     expect(page).to have_content(325)
