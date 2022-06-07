@@ -24,16 +24,23 @@ RSpec.describe Dish, type: :model do
       @ingredient2 = Ingredient.create!(name: 'Cheese', calories: 20)
       @ingredient3 = Ingredient.create!(name: 'Leafy Greens', calories: 10)
       @ingredient4 = Ingredient.create!(name: 'Green Onion', calories: 100)
+      @ingredient5 = Ingredient.create!(name: 'Olive Oil', calories: 30)
 
       @di1 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
       @di2 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient2.id)
       @di3 = DishIngredient.create!(dish_id: @dish3.id, ingredient_id: @ingredient3.id)
       @di4 = DishIngredient.create!(dish_id: @dish4.id, ingredient_id: @ingredient4.id)
+      @di5 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient5.id)
     end
 
     it "#the_chef" do
       expect(@dish1.the_cook).to eq('Cory')
       expect(@dish3.the_cook).to eq('Kyle')
+    end
+
+    it "#total_calories" do
+      expect(@dish1.total_calories).to eq(200)
+      expect(@dish2.total_calories).to eq(50)
     end
   end
 end
