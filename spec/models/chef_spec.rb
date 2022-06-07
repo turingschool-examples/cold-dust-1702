@@ -51,5 +51,19 @@ RSpec.describe Chef, type: :model do
       expect(@jimbob.all_ingredients[5].name).to eq("Tomato Sauce")
       expect(@jimbob.all_ingredients[6]).to eq(nil)
     end
+
+    it 'can sort ingredients by most used' do #4 cheese, 3 sauce, 2 crouton
+      pizza = @jimbob.dishes.create!(name: "Cheese", description: "A classic twist on carb, tomato, cheese")
+      cheesestick = @jimbob.dishes.create!(name: "Mozz Stick", description: "Another testament to carb, tomato, cheese")
+      dough = Ingredient.create!(name: "Pizza dough", calories: 300)
+      dish_ingredient8 = pizza.dish_ingredients.create!(ingredient_id: dough.id)
+      dish_ingredient9 = pizza.dish_ingredients.create!(ingredient_id: @sauce.id)
+      dish_ingredient10 = pizza.dish_ingredients.create!(ingredient_id: @cheese.id)
+      dish_ingredient9 = cheesestick.dish_ingredients.create!(ingredient_id: @sauce.id)
+      dish_ingredient10 = cheesestick.dish_ingredients.create!(ingredient_id: @cheese.id)
+      dish_ingredient11 = cheesestick.dish_ingredients.create!(ingredient_id: @croutons.id)
+
+      expect(@jimbob.top_three_ing).to eq([@cheese, @sauce, @crouton])
+    end
   end
 end
