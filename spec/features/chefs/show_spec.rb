@@ -28,4 +28,6 @@ RSpec.describe 'the chef show page' do
 
     expect(page).to have_content(@wolfgang.name)
   end
+
+  
 end
